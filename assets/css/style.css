@@ -3,7 +3,7 @@
   --app-width: 1140px;
   --body-background-color: #3b3b3b;
   --text-color: #ffffff;
-  --border-color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Reset default browser styles */
@@ -55,4 +55,38 @@ input {
 
 footer {
   border-top: 1px solid var(--border-color);
+}
+
+/* Bookmarks */
+#bookmarks {
+  padding: 1rem;
+}
+
+.bookmark-item {
+  list-style: none;
+  padding: 0.5rem;
+  box-shadow: var(--border-color) 0px 50px 100px -20px,
+    var(--border-color) 0px 30px 60px -30px,
+    var(--border-color) 0px -2px 6px 0px inset;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.bookmark-url {
+  color: var(--text-color);
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.bookmark-url i {
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.bookmark-url:hover i {
+  opacity: 1;
 }

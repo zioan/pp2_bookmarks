@@ -71,8 +71,11 @@ function loadBookmarks() {
 function bookmarkMarkup(url, title) {
   // If the title is empty, display the URL as a title
   return `
-    <li class="bookmark">
-      <a class="bookmark-url" href="${url}" target="_blank" rel="noopener noreferrer">${title ? title : url}</a>
+    <li class="bookmark-item">
+      <a class="bookmark-url" href="${url}" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-arrow-right"></i>
+        ${title ? title : url}
+      </a>
     </li>
   `;
 }
