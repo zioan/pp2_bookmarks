@@ -1,7 +1,9 @@
-// Functions that are executed after the document is loaded
+// Code that is executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   loadBookmarks()
   renderBookmarks()
+
+  DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
 });
 
 /**
@@ -88,4 +90,25 @@ function renderBookmarks() {
   };
 
   bookmarksSection.innerHTML = bookmarkList.join('')
+}
+
+function createNewBookmark() {
+  const bookmarksSection = DOMCache.getElement(".bookmark-list");
+  const bookmarkUrl = DOMCache.getElement("#bookmark-url")
+  const bookmarkTitle = DOMCache.getElement("#bookmark-title")
+
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+  const newBookmark = {
+    url: bookmarkUrl.value,
+    title: bookmarkTitle.value || "",
+  }
+
+  bookmarks.push(newBookmark);
+
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  bookmarksSection.innerHTML += bookmarkMarkup(bookmarkUrl.value, bookmarkTitle.value)
+
+  bookmarkUrl.value = ''
+  bookmarkTitle.value = ''
 }
