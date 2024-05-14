@@ -64,18 +64,15 @@ function loadBookmarks() {
   return JSON.parse(bookmarks);
 }
 
+/**
+ * Generates the markup for a bookmark.
+ * If the title is empty, the URL will be displayed as the title.
+ */
 function bookmarkMarkup(url, title) {
-  let titleMarkup = '';
-
-  // If the title is not empty the markup is created, otherwise only the url markup will be rendered
-  if (title.trim() !== '') {
-    titleMarkup = `<p class="bookmark-title">${title}</p>`;
-  }
-
+  // If the title is empty, display the URL as a title
   return `
     <li class="bookmark">
-      <p class="bookmark-url">${url}</p>
-      ${titleMarkup}
+      <a class="bookmark-url" href="${url}" target="_blank" rel="noopener noreferrer">${title ? title : url}</a>
     </li>
   `;
 }
