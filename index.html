@@ -17,15 +17,22 @@
   <div id="container">
     <h1>Bookmarks App</h1>
     <div class="wrapper">
-      <div class="search-wrapper">
-        <input type="search" name="" id="bookmarks-search" placeholder="Search...">
-        <button id="btn-search">search</button>
+      <div id="search-wrapper">
+        <div class="input-wrapper">
+          <input type="text" id="bookmarks-search" placeholder="Search...">
+          <button id="btn-clear" aria-label="Clear Search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <button id="btn-search" aria-label="Search Bookmarks">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
       <button id="btn-new-bookmark">+</button>
       <div class="input-wrapper">
         <input id="bookmark-url" type="text" placeholder="Bookmark url*">
         <input id="bookmark-title" type="text" placeholder="Bookmark title">
-        <button id="btn-save">Save</button>
+        <button id="btn-save" aria-label="Add New Bookmark">Save</button>
       </div>
       <div id="bookmarks">
         <ul class="bookmark-list"></ul>
