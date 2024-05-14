@@ -1,0 +1,58 @@
+/* CSS variables */
+:root {
+  --app-width: 1140px;
+  --body-background-color: #3b3b3b;
+  --text-color: #ffffff;
+  --border-color: #ffffff;
+}
+
+/* Reset default browser styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* General styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--body-background-color);
+  color: var(--text-color);
+}
+
+#container {
+  width: 100%;
+  max-width: var(--app-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+h1,
+footer {
+  text-align: center;
+  padding: 1rem;
+}
+
+h1 {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.wrapper {
+  flex: 1 0 auto;
+  padding: 1rem 0;
+}
+
+input {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+footer {
+  border-top: 1px solid var(--border-color);
+}
