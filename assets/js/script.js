@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadBookmarks()
   renderBookmarks()
+  clearSearchHandler()
 
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
 });
@@ -62,6 +63,26 @@ function loadBookmarks() {
 
   console.log(JSON.parse(bookmarks))
   return JSON.parse(bookmarks);
+}
+
+/**
+ * Function to handle search input clearing state and button
+ */
+function clearSearchHandler() {
+  const searchInput = DOMCache.getElement("#bookmarks-search")
+  const clearBtn = DOMCache.getElement("#btn-clear")
+
+  clearBtn.style.display = 'none';
+
+  searchInput.addEventListener('input', function () {
+    clearBtn.style.display = this.value ? 'block' : 'none';
+  });
+
+  clearBtn.addEventListener('click', function () {
+    searchInput.value = '';
+    searchInput.focus();
+    clearBtn.style.display = 'none';
+  })
 }
 
 /**
