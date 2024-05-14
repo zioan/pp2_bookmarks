@@ -1,6 +1,7 @@
 // Functions that are executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   loadBookmarks()
+  renderBookmarks()
 });
 
 /**
@@ -59,4 +60,32 @@ function loadBookmarks() {
 
   console.log(JSON.parse(bookmarks))
   return JSON.parse(bookmarks);
+}
+
+function bookmarkMarkup(url, title) {
+  let titleMarkup = '';
+
+  // If the title is not empty the markup is created, otherwise only the url markup will be rendered
+  if (title.trim() !== '') {
+    titleMarkup = `<p class="bookmark-title">${title}</p>`;
+  }
+
+  return `
+    <li class="bookmark">
+      <p class="bookmark-url">${url}</p>
+      ${titleMarkup}
+    </li>
+  `;
+}
+
+function renderBookmarks() {
+  const bookmarks = loadBookmarks();
+  const bookmarksSection = DOMCache.getElement(".bookmark-list");
+  const bookmarkList = []
+
+  for (let bookmark of bookmarks) {
+    bookmarkList.push(bookmarkMarkup(bookmark.url, bookmark.title));
+  };
+
+  bookmarksSection.innerHTML = bookmarkList.join('')
 }
