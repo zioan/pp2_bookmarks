@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Functions that must be loaded initially
   loadBookmarks()
   renderBookmarks()
-  clearSearchHandler()
 
   // Event listeners for the search functionality
-  DOMCache.getElement("#btn-clear").addEventListener("click", renderBookmarks)
+  DOMCache.getElement("#btn-clear").addEventListener("click", clearSearchHandler)
   DOMCache.getElement("#bookmarks-search").addEventListener("input", renderBookmarks)
 
   // Event listener for bookmark creation
@@ -76,17 +75,9 @@ function clearSearchHandler() {
   const searchInput = DOMCache.getElement("#bookmarks-search")
   const clearBtn = DOMCache.getElement("#btn-clear")
 
+  searchInput.value = '';
+  searchInput.focus();
   clearBtn.style.display = 'none';
-
-  searchInput.addEventListener('input', function () {
-    clearBtn.style.display = this.value ? 'block' : 'none';
-  });
-
-  clearBtn.addEventListener('click', function () {
-    searchInput.value = '';
-    searchInput.focus();
-    clearBtn.style.display = 'none';
-  })
 }
 
 /**
@@ -112,7 +103,15 @@ function renderBookmarks() {
   let bookmarks = loadBookmarks();
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
   const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim()
+  const clearBtn = DOMCache.getElement("#btn-clear")
   const bookmarkList = []
+
+  if (searchQuery) {
+    clearBtn.style.display = 'block';
+  } else {
+    clearBtn.style.display = 'none';
+  }
+
   bookmarks = filterBookmarks(searchQuery, bookmarks)
 
   for (let bookmark of bookmarks) {
