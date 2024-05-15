@@ -78,6 +78,7 @@ function clearSearchHandler() {
   searchInput.value = '';
   searchInput.focus();
   clearBtn.style.display = 'none';
+  renderBookmarks()
 }
 
 /**
