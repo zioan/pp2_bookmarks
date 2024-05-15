@@ -100,6 +100,10 @@ function bookmarkMarkup(url, title) {
         <i class="fa-solid fa-arrow-right"></i>
         ${title ? title : url}
       </a>
+      <div class="btn-group">
+        <i id="bookmark-edit" class="fa-solid fa-pencil"></i>
+        <i id="bookmark-delete" class="fa-solid fa-trash"></i>
+      </div>
     </li>
   `;
 }
