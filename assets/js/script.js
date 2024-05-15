@@ -1,10 +1,17 @@
 // Code that is executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
+  // Functions that must be loaded initially
   loadBookmarks()
   renderBookmarks()
   clearSearchHandler()
 
+  // Event listeners for the search functionality
+  DOMCache.getElement("#btn-clear").addEventListener("click", renderBookmarks)
+  DOMCache.getElement("#bookmarks-search").addEventListener("input", renderBookmarks)
+
+  // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
+
 });
 
 /**
@@ -102,15 +109,36 @@ function bookmarkMarkup(url, title) {
 }
 
 function renderBookmarks() {
-  const bookmarks = loadBookmarks();
+  let bookmarks = loadBookmarks();
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
+  const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim()
   const bookmarkList = []
+  bookmarks = filterBookmarks(searchQuery, bookmarks)
 
   for (let bookmark of bookmarks) {
     bookmarkList.push(bookmarkMarkup(bookmark.url, bookmark.title));
   };
 
   bookmarksSection.innerHTML = bookmarkList.join('')
+}
+
+/**
+ * Filters an array of bookmarks based on a search query.
+ */
+function filterBookmarks(searchQuery, bookmarks) {
+  if (!searchQuery) {
+    return bookmarks
+  }
+
+  const filteredBookmarks = []
+
+  for (let bookmark of bookmarks) {
+    if (bookmark.url.includes(searchQuery.trim()) || bookmark.title.includes(searchQuery.trim())) {
+      filteredBookmarks.push(bookmark);
+    }
+  }
+
+  return filteredBookmarks;
 }
 
 function createNewBookmark() {
