@@ -105,6 +105,7 @@ function renderBookmarks() {
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
   const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim()
   const clearBtn = DOMCache.getElement("#btn-clear")
+  const noBookmarksFound = DOMCache.getElement("#no-bookmarks-found")
   const bookmarkList = []
 
   if (searchQuery) {
@@ -114,6 +115,12 @@ function renderBookmarks() {
   }
 
   bookmarks = filterBookmarks(searchQuery, bookmarks)
+
+  if (!bookmarks.length) {
+    noBookmarksFound.style.display = "block"
+  } else {
+    noBookmarksFound.style.display = "none"
+  }
 
   for (let bookmark of bookmarks) {
     bookmarkList.push(bookmarkMarkup(bookmark.url, bookmark.title));

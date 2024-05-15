@@ -4,6 +4,7 @@
   --content-max-width: 600px;
   --main-color: #3b3b3b;
   --secondary-color: rgba(255, 255, 255, 0.5);
+  --warning-color: rgb(243, 82, 82);
   --input-background-color: #F5F5F5;
   --text-color: #ffffff;
 }
@@ -92,6 +93,13 @@ footer {
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: 1rem;
+}
+
+#no-bookmarks-found {
+  color: var(--warning-color);
+  text-align: center;
+  margin: 1rem 0;
+  display: none;
 }
 
 .bookmark-item {
