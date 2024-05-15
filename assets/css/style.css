@@ -64,21 +64,15 @@ footer {
 
 /* Search */
 #search-wrapper {
-  width: 100%;
   max-width: var(--content-max-width);
   margin: 0 auto;
-  display: flex;
-  gap: 1rem;
-}
-
-.input-wrapper {
   position: relative;
-  flex: 1;
 }
 
 #bookmarks-search {
   width: 100%;
   padding-right: 2rem;
+  margin-top: 2rem;
 }
 
 #btn-clear {
@@ -93,17 +87,6 @@ footer {
   cursor: pointer;
 }
 
-#btn-search {
-  color: var(--text-color);
-  font-size: 1.25rem;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer;
-  vertical-align: middle;
-}
-
-#btn-search:active,
 #btn-clear:active {
   transition: transform 0.1s ease-in-out;
   transform: scale(1.2);
