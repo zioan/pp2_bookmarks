@@ -33,8 +33,6 @@ const DOMCache = {
     const element = document.querySelector(selector);
     this.cache[selector] = element;
 
-    console.log("DOMCache:", this.cache)
-
     return element;
   }
 };
@@ -68,7 +66,6 @@ function loadBookmarks() {
     return demoData;
   }
 
-  console.log(JSON.parse(bookmarks))
   return JSON.parse(bookmarks);
 }
 
@@ -97,7 +94,6 @@ function clearSearchHandler() {
  * If the title is empty, the URL will be displayed as the title.
  */
 function bookmarkMarkup(url, title) {
-  // If the title is empty, display the URL as a title
   return `
     <li class="bookmark-item">
       <a class="bookmark-url" href="${url}" target="_blank" rel="noopener noreferrer">
