@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
-
 });
 
 /**
@@ -33,6 +32,19 @@ const DOMCache = {
     this.cache[selector] = element;
 
     return element;
+  },
+  getElements: function (selector) {
+
+    // Check if the element is already cached
+    if (this.cache.hasOwnProperty(selector)) {
+      return this.cache[selector];
+    }
+
+    // Query the DOM and cache the elements
+    const elements = document.querySelectorAll(selector);
+    this.cache[selector] = elements;
+
+    return elements;
   }
 };
 
@@ -94,7 +106,7 @@ function bookmarkMarkup(url, title) {
       </a>
       <div class="btn-group">
         <i id="bookmark-edit" class="fa-solid fa-pencil"></i>
-        <i id="bookmark-delete" class="fa-solid fa-trash"></i>
+        <i id="bookmark-delete" class="fa-solid fa-trash" data-url="${url}"></i>
       </div>
     </li>
   `;
@@ -127,6 +139,12 @@ function renderBookmarks() {
   };
 
   bookmarksSection.innerHTML = bookmarkList.join('')
+
+  // Adding event listeners after the elements are created
+  const deleteButtons = DOMCache.getElements("#bookmark-delete");
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", deleteBookmark);
+  });
 }
 
 /**
@@ -167,4 +185,19 @@ function createNewBookmark() {
 
   bookmarkUrl.value = ''
   bookmarkTitle.value = ''
+}
+
+function deleteBookmark(event) {
+  const bookmarkUrl = event.target.dataset.url;
+  const bookmarkElement = event.target.closest('.bookmark-item');
+  const bookmarks = loadBookmarks()
+
+  const indexToDelete = bookmarks.findIndex(bookmark => bookmark.url === bookmarkUrl);
+  if (indexToDelete !== -1) {
+    bookmarks.splice(indexToDelete, 1);
+    bookmarkElement.remove()
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+  } else {
+    console.warn('Bookmark with URL', bookmarkUrl, 'not found');
+  }
 }
