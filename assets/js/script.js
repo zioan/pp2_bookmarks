@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('keydown', function (event) {
     const modal = document.querySelector('.modal');
     if (modal && event.key === 'Escape') {
-      hideOverlay();
+      closeModal();
     }
   });
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const overlay = DOMCache.getElement("#overlay");
   overlay.addEventListener("click", function (event) {
     if (!event.target.closest('.modal')) {
-      hideOverlay();
+      closeModal();
     }
   });
 });
@@ -129,10 +129,10 @@ function bookmarkMarkup(url, title) {
       </a>
       <div class="btn-group">
         <button>
-        <i id="bookmark-edit" class="fa-solid fa-pencil"></i>
+          <i class="bookmark-edit fa-solid fa-pencil" data-url="${url}"></i>
         </button>
         <button>
-        <i id="bookmark-delete" class="fa-solid fa-trash" data-url="${url}"></i>
+          <i class="bookmark-delete fa-solid fa-trash" data-url="${url}"></i>
         </button>
       </div>
     </li>
@@ -224,11 +224,18 @@ function deleteBookmark(event) {
 }
 
 // Function to show the overlay with modal
-function showOverlay() {
-  document.getElementById('overlay').style.display = 'flex';
+function openModal(children) {
+  const modal = DOMCache.getElement("#overlay")
+  const modalContent = DOMCache.getElement("#modal-content")
+  modal.style.display = "flex"
+
+  modalContent.innerHTML = children
 }
 
 // Function to hide the overlay with modal
-function hideOverlay() {
-  document.getElementById('overlay').style.display = 'none';
+function closeModal() {
+  const modal = DOMCache.getElement("#overlay")
+  const modalContent = DOMCache.getElement("#modal-content")
+  modal.style.display = "none"
+  modalContent.innerHTML = ""
 }
