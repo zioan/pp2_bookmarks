@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for delete buttons using event delegation
   DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
-    if (event.target && event.target.matches("#bookmark-delete")) {
+    if (event.target && event.target.matches(".bookmark-delete")) {
       deleteBookmark(event);
     }
   });
