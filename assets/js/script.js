@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
 
-  // Event listener for delete buttons using event delegation
+  // Event listener for edit button using event delegation
+  DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
+    if (event.target && event.target.matches(".bookmark-edit")) {
+      editBookmark(event);
+    }
+  });
+
+  // Event listener for delete button using event delegation
   DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
     if (event.target && event.target.matches(".bookmark-delete")) {
       deleteBookmark(event);
@@ -208,6 +215,38 @@ function createNewBookmark() {
   bookmarkTitle.value = ''
 }
 
+function editBookmark(event) {
+  const bookmarkUrl = event.target.dataset.url;
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  const editUrl = DOMCache.getElement("#edit-url")
+  const editTitle = DOMCache.getElement("#edit-title")
+
+  const indexToEdit = bookmarks.findIndex(bookmark => bookmark.url === bookmarkUrl);
+  const bookmarkToUpdate = bookmarks[indexToEdit]
+
+  editUrl.value = bookmarkToUpdate.url
+  editTitle.value = bookmarkToUpdate.title
+
+  DOMCache.getElement("#btn-update").addEventListener("click", function () {
+    editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value)
+  })
+
+  openModal()
+}
+
+function editBookmarkHandler(bookmarks, index, url, title) {
+  console.log("update handler triggered")
+  const updatedBookmark = {
+    url,
+    title
+  }
+  bookmarks[index] = updatedBookmark
+
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+  closeModal()
+  renderBookmarks()
+}
+
 function deleteBookmark(event) {
   const bookmarkUrl = event.target.dataset.url;
   const bookmarkElement = event.target.closest('.bookmark-item');
@@ -229,7 +268,8 @@ function openModal(children) {
   const modalContent = DOMCache.getElement("#modal-content")
   modal.style.display = "flex"
 
-  modalContent.innerHTML = children
+  children && (modalContent.innerHTML = children)
+
 }
 
 // Function to hide the overlay with modal
@@ -237,5 +277,4 @@ function closeModal() {
   const modal = DOMCache.getElement("#overlay")
   const modalContent = DOMCache.getElement("#modal-content")
   modal.style.display = "none"
-  modalContent.innerHTML = ""
 }
