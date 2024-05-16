@@ -128,8 +128,12 @@ function bookmarkMarkup(url, title) {
         ${title ? title : url}
       </a>
       <div class="btn-group">
+        <button>
         <i id="bookmark-edit" class="fa-solid fa-pencil"></i>
+        </button>
+        <button>
         <i id="bookmark-delete" class="fa-solid fa-trash" data-url="${url}"></i>
+        </button>
       </div>
     </li>
   `;
