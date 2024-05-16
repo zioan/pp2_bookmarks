@@ -17,23 +17,37 @@
   <div id="container">
     <h1>Bookmarks App</h1>
     <div class="wrapper">
+      <!-- Search -->
       <div id="search-wrapper">
         <input type="text" id="bookmarks-search" placeholder="Search...">
         <button id="btn-clear" aria-label="Clear Search">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <button id="btn-new-bookmark">+</button>
+
+      <!-- Create New Bookmark -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-plus" aria-label="Create new Bookmark"></i>
+        </summary>
+        <p>Create a new bookmark</p>
       <div class="input-wrapper">
         <input id="bookmark-url" type="text" placeholder="Bookmark url*">
         <input id="bookmark-title" type="text" placeholder="Bookmark title">
-        <button id="btn-save" aria-label="Add New Bookmark">Save</button>
+          <button id="btn-save" aria-label="Add New Bookmark">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
       </div>
+      </details>
+
+      <!-- Bookmarks List -->
       <p id="no-bookmarks-found">No bookmarks found, search for something else.</p>
       <div id="bookmarks">
         <ul class="bookmark-list"></ul>
       </div>
     </div>
+
+    <!-- Footer -->
     <footer>
       <p>Made By <a href="http://ioanzaharia.com" target="_blank" rel="noopener noreferrer">Ioan Zaharia</a></p>
     </footer>

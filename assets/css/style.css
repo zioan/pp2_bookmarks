@@ -7,6 +7,8 @@
   --warning-color: rgb(243, 82, 82);
   --input-background-color: #F5F5F5;
   --text-color: #ffffff;
+  --box-shadow: var(--secondary-color) 0px -2px 6px 0px inset;
+  --border-radius: 0.5rem;
 }
 
 /* Reset default browser styles */
@@ -55,8 +57,21 @@ input {
   background-color: var(--input-background-color);
   padding: 0.5rem;
   margin: 0.5rem 0;
-  border-radius: 0.5rem;
-  outline: none;
+  border-radius: var(--border-radius);
+}
+
+button {
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text-color);
+}
+
+button:hover,
+summary i:hover {
+  transition: transform 0.1s ease-in-out;
+  transform: scale(1.2);
 }
 
 footer {
@@ -73,7 +88,7 @@ footer {
 #bookmarks-search {
   width: 100%;
   padding-right: 2rem;
-  margin-top: 2rem;
+  margin: 2rem 0 1rem;
 }
 
 #btn-clear {
@@ -105,10 +120,8 @@ footer {
 .bookmark-item {
   list-style: none;
   padding: 0.5rem;
-  box-shadow: var(--secondary-color) 0px 50px 100px -20px,
-    var(--secondary-color) 0px 30px 60px -30px,
-    var(--secondary-color) 0px -2px 6px 0px inset;
-  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
   margin-bottom: 0.75rem;
   display: flex;
   justify-content: space-between;
@@ -142,14 +155,56 @@ footer {
   display: flex;
 }
 
-.btn-group i {
+.btn-group button {
   margin-right: 0.5rem;
-  cursor: pointer;
 }
 
-.btn-group i:hover {
-  transition: transform 0.1s ease-in-out;
-  transform: scale(1.2);
+/* New Bookmark */
+summary {
+  list-style-type: '';
+  font-size: 2rem;
+}
+
+details {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+}
+
+details[open]>summary i {
+  color: var(--secondary-color);
+}
+
+details p {
+  text-align: center;
+  text-decoration: underline;
+}
+
+summary {
+  cursor: pointer;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+.input-wrapper input {
+  flex: 1;
+}
+
+.input-wrapper button {
+  font-size: 1.25rem;
+  margin-left: 1rem;
+  ;
 }
 
 /* Footer */
