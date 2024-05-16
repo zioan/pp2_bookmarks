@@ -10,6 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
+
+  // Event listener for delete buttons using event delegation
+  DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
+    if (event.target && event.target.matches("#bookmark-delete")) {
+      deleteBookmark(event);
+    }
+  });
 });
 
 /**
@@ -139,12 +146,6 @@ function renderBookmarks() {
   };
 
   bookmarksSection.innerHTML = bookmarkList.join('')
-
-  // Adding event listeners after the elements are created
-  const deleteButtons = DOMCache.getElements("#bookmark-delete");
-  deleteButtons.forEach(button => {
-    button.addEventListener("click", deleteBookmark);
-  });
 }
 
 /**
