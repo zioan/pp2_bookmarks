@@ -1,15 +1,15 @@
 // Code that is executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Functions that must be loaded initially
-  loadBookmarks()
-  renderBookmarks()
+  loadBookmarks();
+  renderBookmarks();
 
   // Event listeners for the search functionality
-  DOMCache.getElement("#btn-clear").addEventListener("click", clearSearchHandler)
-  DOMCache.getElement("#bookmarks-search").addEventListener("input", renderBookmarks)
+  DOMCache.getElement("#btn-clear").addEventListener("click", clearSearchHandler);
+  DOMCache.getElement("#bookmarks-search").addEventListener("input", renderBookmarks);
 
   // Event listener for bookmark creation
-  DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark)
+  DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark);
 
   // Event listener for edit button using event delegation
   DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Add event listener to close the modal with the Escape key
-  document.addEventListener('keydown', function (event) {
-    const modal = document.querySelector('.modal');
-    if (modal && event.key === 'Escape') {
+  document.addEventListener("keydown", function (event) {
+    const modal = document.querySelector(".modal");
+    if (modal && event.key === "Escape") {
       closeModal();
     }
   });
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Prevent the overlay from closing if the click is inside the modal
   const overlay = DOMCache.getElement("#overlay");
   overlay.addEventListener("click", function (event) {
-    if (!event.target.closest('.modal')) {
+    if (!event.target.closest(".modal")) {
       closeModal();
     }
   });
@@ -44,14 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /**
  * This global object stores DOM elements in the cache.
- * The reason for this approach is to minimize the pollution caused 
- * by global variables and to keep the code maintainable and as short 
+ * The reason for this approach is to minimize the pollution caused
+ * by global variables and to keep the code maintainable and as short
  * as possible by reducing repetitive code to retrieve DOM elements.
  */
 const DOMCache = {
   cache: {},
   getElement: function (selector) {
-
     // Check if the element is already cached
     if (this.cache.hasOwnProperty(selector)) {
       return this.cache[selector];
@@ -64,7 +63,6 @@ const DOMCache = {
     return element;
   },
   getElements: function (selector) {
-
     // Check if the element is already cached
     if (this.cache.hasOwnProperty(selector)) {
       return this.cache[selector];
@@ -75,12 +73,13 @@ const DOMCache = {
     this.cache[selector] = elements;
 
     return elements;
-  }
+  },
 };
 
 // demo data
 function demoData() {
-  return [{
+  return [
+    {
       url: "https://ioanzaharia.com/",
       title: "Ioan Zaharia personal portfolio",
     },
@@ -92,7 +91,7 @@ function demoData() {
       url: "https://www.google.com/",
       title: "",
     },
-  ]
+  ];
 }
 
 /**
@@ -100,10 +99,10 @@ function demoData() {
  * If no data is found, the demo data is stored in the local storage.
  */
 function loadBookmarks() {
-  const bookmarks = localStorage.getItem('bookmarks');
+  const bookmarks = localStorage.getItem("bookmarks");
 
   if (!bookmarks) {
-    localStorage.setItem('bookmarks', JSON.stringify(demoData()));
+    localStorage.setItem("bookmarks", JSON.stringify(demoData()));
     return demoData;
   }
 
@@ -114,13 +113,13 @@ function loadBookmarks() {
  * Function to handle search input clearing state and button
  */
 function clearSearchHandler() {
-  const searchInput = DOMCache.getElement("#bookmarks-search")
-  const clearBtn = DOMCache.getElement("#btn-clear")
+  const searchInput = DOMCache.getElement("#bookmarks-search");
+  const clearBtn = DOMCache.getElement("#btn-clear");
 
-  searchInput.value = '';
+  searchInput.value = "";
   searchInput.focus();
-  clearBtn.style.display = 'none';
-  renderBookmarks()
+  clearBtn.style.display = "none";
+  renderBookmarks();
 }
 
 /**
@@ -149,30 +148,30 @@ function bookmarkMarkup(url, title) {
 function renderBookmarks() {
   let bookmarks = loadBookmarks();
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
-  const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim()
-  const clearBtn = DOMCache.getElement("#btn-clear")
-  const noBookmarksFound = DOMCache.getElement("#no-bookmarks-found")
-  const bookmarkList = []
+  const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim();
+  const clearBtn = DOMCache.getElement("#btn-clear");
+  const noBookmarksFound = DOMCache.getElement("#no-bookmarks-found");
+  const bookmarkList = [];
 
   if (searchQuery) {
-    clearBtn.style.display = 'block';
+    clearBtn.style.display = "block";
   } else {
-    clearBtn.style.display = 'none';
+    clearBtn.style.display = "none";
   }
 
-  bookmarks = filterBookmarks(searchQuery, bookmarks)
+  bookmarks = filterBookmarks(searchQuery, bookmarks);
 
   if (!bookmarks.length) {
-    noBookmarksFound.style.display = "block"
+    noBookmarksFound.style.display = "block";
   } else {
-    noBookmarksFound.style.display = "none"
+    noBookmarksFound.style.display = "none";
   }
 
   for (let bookmark of bookmarks) {
     bookmarkList.push(bookmarkMarkup(bookmark.url, bookmark.title));
-  };
+  }
 
-  bookmarksSection.innerHTML = bookmarkList.join('')
+  bookmarksSection.innerHTML = bookmarkList.join("");
 }
 
 /**
@@ -180,10 +179,10 @@ function renderBookmarks() {
  */
 function filterBookmarks(searchQuery, bookmarks) {
   if (!searchQuery) {
-    return bookmarks
+    return bookmarks;
   }
 
-  const filteredBookmarks = []
+  const filteredBookmarks = [];
 
   for (let bookmark of bookmarks) {
     if (bookmark.url.includes(searchQuery.trim()) || bookmark.title.includes(searchQuery.trim())) {
@@ -196,85 +195,84 @@ function filterBookmarks(searchQuery, bookmarks) {
 
 function createNewBookmark() {
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
-  const bookmarkUrl = DOMCache.getElement("#bookmark-url")
-  const bookmarkTitle = DOMCache.getElement("#bookmark-title")
+  const bookmarkUrl = DOMCache.getElement("#bookmark-url");
+  const bookmarkTitle = DOMCache.getElement("#bookmark-title");
 
-  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 
   const newBookmark = {
     url: bookmarkUrl.value,
     title: bookmarkTitle.value || "",
-  }
+  };
 
   bookmarks.push(newBookmark);
 
-  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-  bookmarksSection.innerHTML += bookmarkMarkup(bookmarkUrl.value, bookmarkTitle.value)
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  bookmarksSection.innerHTML += bookmarkMarkup(bookmarkUrl.value, bookmarkTitle.value);
 
-  bookmarkUrl.value = ''
-  bookmarkTitle.value = ''
+  bookmarkUrl.value = "";
+  bookmarkTitle.value = "";
 }
 
 function editBookmark(event) {
   const bookmarkUrl = event.target.dataset.url;
-  const bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-  const editUrl = DOMCache.getElement("#edit-url")
-  const editTitle = DOMCache.getElement("#edit-title")
+  const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+  const editUrl = DOMCache.getElement("#edit-url");
+  const editTitle = DOMCache.getElement("#edit-title");
 
-  const indexToEdit = bookmarks.findIndex(bookmark => bookmark.url === bookmarkUrl);
-  const bookmarkToUpdate = bookmarks[indexToEdit]
+  const indexToEdit = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
+  const bookmarkToUpdate = bookmarks[indexToEdit];
 
-  editUrl.value = bookmarkToUpdate.url
-  editTitle.value = bookmarkToUpdate.title
+  editUrl.value = bookmarkToUpdate.url;
+  editTitle.value = bookmarkToUpdate.title;
 
   DOMCache.getElement("#btn-update").addEventListener("click", function () {
-    editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value)
-  })
+    editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value);
+  });
 
-  openModal()
+  openModal();
 }
 
 function editBookmarkHandler(bookmarks, index, url, title) {
-  console.log("update handler triggered")
+  console.log("update handler triggered");
   const updatedBookmark = {
     url,
-    title
-  }
-  bookmarks[index] = updatedBookmark
+    title,
+  };
+  bookmarks[index] = updatedBookmark;
 
-  localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
-  closeModal()
-  renderBookmarks()
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  closeModal();
+  renderBookmarks();
 }
 
 function deleteBookmark(event) {
   const bookmarkUrl = event.target.dataset.url;
-  const bookmarkElement = event.target.closest('.bookmark-item');
-  const bookmarks = loadBookmarks()
+  const bookmarkElement = event.target.closest(".bookmark-item");
+  const bookmarks = loadBookmarks();
 
-  const indexToDelete = bookmarks.findIndex(bookmark => bookmark.url === bookmarkUrl);
+  const indexToDelete = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
   if (indexToDelete !== -1) {
     bookmarks.splice(indexToDelete, 1);
-    bookmarkElement.remove()
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+    bookmarkElement.remove();
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   } else {
-    console.warn('Bookmark with URL', bookmarkUrl, 'not found');
+    console.warn("Bookmark with URL", bookmarkUrl, "not found");
   }
 }
 
 // Function to show the overlay with modal
 function openModal(children) {
-  const modal = DOMCache.getElement("#overlay")
-  const modalContent = DOMCache.getElement("#modal-content")
-  modal.style.display = "flex"
+  const modal = DOMCache.getElement("#overlay");
+  const modalContent = DOMCache.getElement("#modal-content");
+  modal.style.display = "flex";
 
-  children && (modalContent.innerHTML = children)
-
+  children && (modalContent.innerHTML = children);
 }
 
 // Function to hide the overlay with modal
 function closeModal() {
-  const modal = DOMCache.getElement("#overlay")
-  const modalContent = DOMCache.getElement("#modal-content")
-  modal.style.display = "none"
+  const modal = DOMCache.getElement("#overlay");
+  const modalContent = DOMCache.getElement("#modal-content");
+  modal.style.display = "none";
 }

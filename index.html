@@ -1,79 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Bookmarks app" />
+    <meta name="keywords" content="bookmarks, bookmarks app" />
+    <meta name="author" content="Ioan Zaharia" />
+    <title>Bookmarks app</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Meta tags for SEO -->
-  <meta name="description" content="Bookmarks app">
-  <meta name="keywords" content="bookmarks, bookmarks app">
-  <meta name="author" content="Ioan Zaharia">
-  <title>Bookmarks app</title>
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-  <div id="container">
-    <h1>Bookmarks App</h1>
-    <div class="wrapper">
-      <!-- Search -->
-      <div id="search-wrapper">
-        <input type="text" id="bookmarks-search" placeholder="Search...">
-        <button id="btn-clear" aria-label="Clear Search">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Create New Bookmark -->
-      <details>
-        <summary>
-          <i class="fa-solid fa-plus" aria-label="Create new Bookmark"></i>
-        </summary>
-        <p>Create a new bookmark</p>
-      <div class="input-wrapper">
-        <input id="bookmark-url" type="text" placeholder="Bookmark url*">
-        <input id="bookmark-title" type="text" placeholder="Bookmark title">
-          <button id="btn-save" aria-label="Add New Bookmark">
-            <i class="fa-solid fa-floppy-disk"></i>
+  <body>
+    <div id="container">
+      <h1>Bookmarks App</h1>
+      <div class="wrapper">
+        <!-- Search -->
+        <div id="search-wrapper">
+          <input type="text" id="bookmarks-search" placeholder="Search..." />
+          <button id="btn-clear" aria-label="Clear Search">
+            <i class="fa-solid fa-xmark"></i>
           </button>
-      </div>
-      </details>
+        </div>
 
-      <!-- Bookmarks List -->
-      <p id="no-bookmarks-found">No bookmarks found, search for something else.</p>
-      <div id="bookmarks">
-        <ul class="bookmark-list"></ul>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="overlay">
-      <div class="modal">
-        <i class="fa-solid fa-xmark close" aria-label="Close modal" onclick="closeModal()"></i>
-        <div id="modal-content">
-          <div>
-            <input id="edit-url" type="text" placeholder="Bookmark url*">
-            <input id="edit-title" type="text" placeholder="Bookmark title">
-            <button id="btn-update" aria-label="Update Bookmark">
+        <!-- Create New Bookmark -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-plus" aria-label="Create new Bookmark"></i>
+          </summary>
+          <p>Create a new bookmark</p>
+          <div class="input-wrapper">
+            <input id="bookmark-url" type="text" placeholder="Bookmark url*" />
+            <input id="bookmark-title" type="text" placeholder="Bookmark title" />
+            <button id="btn-save" aria-label="Add New Bookmark">
               <i class="fa-solid fa-floppy-disk"></i>
             </button>
           </div>
+        </details>
+
+        <!-- Bookmarks List -->
+        <p id="no-bookmarks-found">No bookmarks found, search for something else.</p>
+        <div id="bookmarks">
+          <ul class="bookmark-list"></ul>
         </div>
       </div>
+
+      <!-- Modal -->
+      <button onclick="openModal()">Open Modal</button>
+      <div id="overlay">
+        <div class="modal">
+          <i class="fa-solid fa-xmark close" aria-label="Close modal" onclick="closeModal()"></i>
+          <div id="modal-content">
+            <div>
+              <input id="edit-url" type="text" placeholder="Bookmark url*" />
+              <input id="edit-title" type="text" placeholder="Bookmark title" />
+              <button id="btn-update" aria-label="Update Bookmark">
+                <i class="fa-solid fa-floppy-disk"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>Made By <a href="http://ioanzaharia.com" target="_blank" rel="noopener noreferrer">Ioan Zaharia</a></p>
+      </footer>
     </div>
 
-    <!-- Footer -->
-    <footer>
-      <p>Made By <a href="http://ioanzaharia.com" target="_blank" rel="noopener noreferrer">Ioan Zaharia</a></p>
-    </footer>
-  </div>
+    <!-- Font Awesome kit -->
+    <script src="https://kit.fontawesome.com/3b20d96fa9.js" crossorigin="anonymous"></script>
 
-
-  <!-- Font Awesome kit -->
-  <script src="https://kit.fontawesome.com/3b20d96fa9.js" crossorigin="anonymous"></script>
-
-  <script src="assets/js/script.js"></script>
-</body>
-
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>

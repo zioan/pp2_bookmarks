@@ -5,7 +5,7 @@
   --main-color: #3b3b3b;
   --secondary-color: rgba(255, 255, 255, 0.5);
   --warning-color: rgb(243, 82, 82);
-  --input-background-color: #F5F5F5;
+  --input-background-color: #f5f5f5;
   --text-color: #ffffff;
   --box-shadow: var(--secondary-color) 0px -2px 6px 0px inset;
   --border-radius: 0.5rem;
@@ -161,7 +161,7 @@ footer {
 
 /* New Bookmark */
 summary {
-  list-style-type: '';
+  list-style-type: "";
   font-size: 2rem;
 }
 
@@ -171,7 +171,7 @@ details {
   padding: 0.5rem 1rem;
 }
 
-details[open]>summary i {
+details[open] > summary i {
   color: var(--secondary-color);
 }
 
@@ -204,7 +204,6 @@ summary {
 .input-wrapper button {
   font-size: 1.25rem;
   margin-left: 1rem;
-  ;
 }
 
 /* Modal */
