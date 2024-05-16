@@ -17,6 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
       deleteBookmark(event);
     }
   });
+
+  // Add event listener to close the modal with the Escape key
+  document.addEventListener('keydown', function (event) {
+    const modal = document.querySelector('.modal');
+    if (modal && event.key === 'Escape') {
+      hideOverlay();
+    }
+  });
+
+  // Prevent the overlay from closing if the click is inside the modal
+  const overlay = DOMCache.getElement("#overlay");
+  overlay.addEventListener("click", function (event) {
+    if (!event.target.closest('.modal')) {
+      hideOverlay();
+    }
+  });
 });
 
 /**
@@ -201,4 +217,14 @@ function deleteBookmark(event) {
   } else {
     console.warn('Bookmark with URL', bookmarkUrl, 'not found');
   }
+}
+
+// Function to show the overlay with modal
+function showOverlay() {
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+// Function to hide the overlay with modal
+function hideOverlay() {
+  document.getElementById('overlay').style.display = 'none';
 }
