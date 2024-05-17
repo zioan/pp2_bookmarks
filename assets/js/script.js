@@ -185,7 +185,7 @@ function filterBookmarks(searchQuery, bookmarks) {
   const filteredBookmarks = [];
 
   for (let bookmark of bookmarks) {
-    if (bookmark.url.includes(searchQuery.trim()) || bookmark.title.includes(searchQuery.trim())) {
+    if (bookmark.title.includes(searchQuery.trim())) {
       filteredBookmarks.push(bookmark);
     }
   }
