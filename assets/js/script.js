@@ -131,7 +131,7 @@ function bookmarkMarkup(url, title) {
     <li class="bookmark-item">
       <a class="bookmark-url" href="${url}" target="_blank" rel="noopener noreferrer">
         <i class="fa-solid fa-arrow-right"></i>
-        ${title ? title : url}
+        ${title}
       </a>
       <div class="btn-group">
         <button>
@@ -175,7 +175,7 @@ function renderBookmarks() {
 }
 
 /**
- * Filters an array of bookmarks based on a search query.
+ * Filters the array of bookmarks based on a search query.
  */
 function filterBookmarks(searchQuery, bookmarks) {
   if (!searchQuery) {
@@ -193,18 +193,69 @@ function filterBookmarks(searchQuery, bookmarks) {
   return filteredBookmarks;
 }
 
+/**
+ * Check if the URL is valid.
+ */
+function isValidUrl(url) {
+  try {
+    const newUrl = new URL(url);
+    return newUrl.protocol === "http:" || newUrl.protocol === "https:";
+  } catch (error) {
+    return false;
+  }
+}
+
+function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
+  const createWarningMessage = (message) => `<p class='warning'>${message}</p>`;
+
+  const warnings = {
+    emptyFields: createWarningMessage("You cannot save the bookmark with an empty URL and Title!"),
+    emptyUrl: createWarningMessage("You must provide a valid URL! The URL field is empty."),
+    emptyTitle: createWarningMessage("You must provide a Title! The Title field is empty."),
+    invalidUrl: createWarningMessage("The URL is not valid! You can copy the URL from the address bar to ensure your URL is valid and functional."),
+  };
+
+  if (!url.trim() && !title.trim()) {
+    openModal(warnings.emptyFields, bookmarkUrl);
+    return false;
+  }
+
+  if (!url.trim()) {
+    openModal(warnings.emptyUrl, bookmarkUrl);
+    return false;
+  }
+
+  if (!title.trim()) {
+    openModal(warnings.emptyTitle, bookmarkTitle);
+    return false;
+  }
+
+  if (!isValidUrl(url)) {
+    openModal(warnings.invalidUrl, bookmarkUrl);
+    return false;
+  }
+
+  return true;
+}
+
 function createNewBookmark() {
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
   const bookmarkUrl = DOMCache.getElement("#bookmark-url");
   const bookmarkTitle = DOMCache.getElement("#bookmark-title");
 
-  const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+  const url = bookmarkUrl.value;
+  const title = bookmarkTitle.value;
+
+  if (!validateBookmark(url, title, bookmarkUrl, bookmarkTitle)) {
+    return;
+  }
 
   const newBookmark = {
-    url: bookmarkUrl.value,
-    title: bookmarkTitle.value || "",
+    url,
+    title,
   };
 
+  const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
   bookmarks.push(newBookmark);
 
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
@@ -262,12 +313,16 @@ function deleteBookmark(event) {
 }
 
 // Function to show the overlay with modal
-function openModal(children) {
+function openModal(children, elementToFocus) {
   const modal = DOMCache.getElement("#overlay");
   const modalContent = DOMCache.getElement("#modal-content");
   modal.style.display = "flex";
 
+  originalModalContent = modalContent.innerHTML;
   children && (modalContent.innerHTML = children);
+
+  // Store the element (input field) to be focused when the modal is closed
+  modal.elementToFocus = elementToFocus;
 }
 
 // Function to hide the overlay with modal
@@ -275,4 +330,10 @@ function closeModal() {
   const modal = DOMCache.getElement("#overlay");
   const modalContent = DOMCache.getElement("#modal-content");
   modal.style.display = "none";
+
+  // Focus the stored element and remove it from cache
+  if (modal.elementToFocus) {
+    modal.elementToFocus.focus();
+    delete modal.elementToFocus;
+  }
 }

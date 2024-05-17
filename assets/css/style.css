@@ -4,7 +4,7 @@
   --content-max-width: 600px;
   --main-color: #3b3b3b;
   --secondary-color: rgba(255, 255, 255, 0.5);
-  --warning-color: rgb(243, 82, 82);
+  --warning-color: #ff9d00;
   --input-background-color: #f5f5f5;
   --text-color: #ffffff;
   --box-shadow: var(--secondary-color) 0px -2px 6px 0px inset;
@@ -72,6 +72,15 @@ button:hover,
 summary i:hover {
   transition: transform 0.1s ease-in-out;
   transform: scale(1.2);
+}
+
+.warning {
+  color: var(--warning-color);
+  text-align: center;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 1px solid var(--warning-color);
+  border-radius: var(--border-radius);
 }
 
 footer {
