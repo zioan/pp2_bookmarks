@@ -119,7 +119,7 @@ footer {
   padding: 1rem;
 }
 
-#no-bookmarks-found {
+#bookmarks-count {
   color: var(--warning-color);
   text-align: center;
   margin: 1rem 0;

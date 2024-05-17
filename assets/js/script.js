@@ -148,23 +148,28 @@ function bookmarkMarkup(url, title) {
 function renderBookmarks() {
   let bookmarks = loadBookmarks();
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
+  const bookmarksCount = DOMCache.getElement("#bookmarks-count");
   const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim();
   const clearBtn = DOMCache.getElement("#btn-clear");
   const noBookmarksFound = DOMCache.getElement("#no-bookmarks-found");
   const bookmarkList = [];
 
-  if (searchQuery) {
-    clearBtn.style.display = "block";
-  } else {
-    clearBtn.style.display = "none";
-  }
-
   bookmarks = filterBookmarks(searchQuery, bookmarks);
 
-  if (!bookmarks.length) {
-    noBookmarksFound.style.display = "block";
+  if (searchQuery) {
+    clearBtn.style.display = "block";
+    bookmarksCount.style.display = "block";
+
+    if (!bookmarks.length) {
+      bookmarksCount.innerText = `No bookmarks found`;
+    } else if (bookmarks.length === 1) {
+      bookmarksCount.innerText = `1 bookmark found`;
+    } else {
+      bookmarksCount.innerText = `${bookmarks.length} bookmarks found`;
+    }
   } else {
-    noBookmarksFound.style.display = "none";
+    clearBtn.style.display = "none";
+    bookmarksCount.style.display = "none";
   }
 
   for (let bookmark of bookmarks) {
