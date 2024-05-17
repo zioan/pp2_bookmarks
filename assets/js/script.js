@@ -206,6 +206,7 @@ function isValidUrl(url) {
 }
 
 function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
+  const modalContent = DOMCache.getElement(".warning-content");
   const createWarningMessage = (message) => `<p class='warning'>${message}</p>`;
 
   const warnings = {
@@ -215,23 +216,29 @@ function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
     invalidUrl: createWarningMessage("The URL is not valid! You can copy the URL from the address bar to ensure your URL is valid and functional."),
   };
 
+  const displayModalContent = "warning-content";
+
   if (!url.trim() && !title.trim()) {
-    openModal(warnings.emptyFields, bookmarkUrl);
+    modalContent.innerHTML = warnings.emptyFields;
+    openModal(bookmarkUrl, displayModalContent);
     return false;
   }
 
   if (!url.trim()) {
-    openModal(warnings.emptyUrl, bookmarkUrl);
+    modalContent.innerHTML = warnings.emptyUrl;
+    openModal(bookmarkUrl, displayModalContent);
     return false;
   }
 
   if (!title.trim()) {
-    openModal(warnings.emptyTitle, bookmarkTitle);
+    modalContent.innerHTML = warnings.emptyTitle;
+    openModal(bookmarkTitle, displayModalContent);
     return false;
   }
 
   if (!isValidUrl(url)) {
-    openModal(warnings.invalidUrl, bookmarkUrl);
+    modalContent.innerHTML = warnings.invalidUrl;
+    openModal(bookmarkUrl, displayModalContent);
     return false;
   }
 
@@ -281,7 +288,9 @@ function editBookmark(event) {
     editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value);
   });
 
-  openModal();
+  const displayModalContent = "edit-content";
+
+  openModal("", displayModalContent);
 }
 
 function editBookmarkHandler(bookmarks, index, url, title) {
@@ -313,23 +322,36 @@ function deleteBookmark(event) {
 }
 
 // Function to show the overlay with modal
-function openModal(children, elementToFocus) {
+function openModal(elementToFocus, displayModalContent) {
   const modal = DOMCache.getElement("#overlay");
   const modalContent = DOMCache.getElement("#modal-content");
   modal.style.display = "flex";
 
-  originalModalContent = modalContent.innerHTML;
-  children && (modalContent.innerHTML = children);
+  if (displayModalContent === "edit-content") {
+    const editMarkup = DOMCache.getElement(".edit-content");
+    editMarkup.style.display = "block";
+  }
+
+  if (displayModalContent === "warning-content") {
+    const warningMarkup = DOMCache.getElement(".warning-content");
+    warningMarkup.style.display = "block";
+  }
 
   // Store the element (input field) to be focused when the modal is closed
-  modal.elementToFocus = elementToFocus;
+  if (elementToFocus) {
+    modal.elementToFocus = elementToFocus;
+  }
 }
 
 // Function to hide the overlay with modal
 function closeModal() {
   const modal = DOMCache.getElement("#overlay");
-  const modalContent = DOMCache.getElement("#modal-content");
+  const editMarkup = DOMCache.getElement(".edit-content");
+  const warningMarkup = DOMCache.getElement(".warning-content");
+
   modal.style.display = "none";
+  editMarkup.style.display = "none";
+  warningMarkup.style.display = "none";
 
   // Focus the stored element and remove it from cache
   if (modal.elementToFocus) {
