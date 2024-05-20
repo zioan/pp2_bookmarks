@@ -334,7 +334,7 @@ function openModal(elementToFocus, displayModalContent) {
 
   if (displayModalContent === "edit-content") {
     const editMarkup = DOMCache.getElement(".edit-content");
-    editMarkup.style.display = "block";
+    editMarkup.style.display = "flex";
   }
 
   if (displayModalContent === "warning-content") {
