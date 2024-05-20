@@ -283,6 +283,7 @@ function createNewBookmark() {
 
   bookmarkUrl.value = "";
   bookmarkTitle.value = "";
+  displaySuccessFeedback();
 }
 
 function editBookmark(event) {
@@ -316,6 +317,7 @@ function editBookmarkHandler(bookmarks, index, url, title) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   closeModal();
   renderBookmarks();
+  displaySuccessFeedback();
 }
 
 function showDeleteConfirmation(event) {
@@ -323,7 +325,7 @@ function showDeleteConfirmation(event) {
   const bookmarkUrl = bookmarkElement.querySelector(".bookmark-delete").dataset.url;
   const bookmarkTitle = bookmarkElement.querySelector(".bookmark-url").textContent.trim();
   const deleteMessage = DOMCache.getElement(".delete-message");
-  deleteMessage.textContent = `Are you sure you want to delete the bookmark for "${bookmarkTitle}"?`;
+  deleteMessage.textContent = `Are you sure you want to delete "${bookmarkTitle}"?`;
 
   // Attach the bookmark element to the confirm button as a dataset
   const confirmButton = DOMCache.getElement("#btn-confirm-delete");
@@ -350,6 +352,15 @@ function confirmDelete() {
   // Clean up the dataset
   delete confirmButton.dataset.bookmarkUrl;
   closeModal();
+  displaySuccessFeedback();
+}
+
+function displaySuccessFeedback() {
+  const successFeedback = DOMCache.getElement(".success-feedback");
+  successFeedback.style.display = "block";
+  setTimeout(() => {
+    successFeedback.style.display = "none";
+  }, 1500);
 }
 
 // Function to show the overlay with modal
