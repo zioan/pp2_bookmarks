@@ -11,19 +11,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark);
 
-  // Event listener for edit button using event delegation
-  DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
-    if (event.target && event.target.matches(".bookmark-edit")) {
-      editBookmark(event);
-    }
+  // Event listeners for edit and delete handlers that open the modal
+  DOMCache.getElements(".bookmark-item").forEach(function (button) {
+    addEventListener("click", function (event) {
+      const target = event.target;
+
+      if (target.classList.contains("bookmark-edit")) {
+        editBookmark(event);
+      } else if (target.classList.contains("bookmark-delete")) {
+        showDeleteConfirmation(event);
+      }
+    });
   });
 
-  // Event listener for delete button using event delegation
-  DOMCache.getElement(".bookmark-list").addEventListener("click", function (event) {
-    if (event.target && event.target.matches(".bookmark-delete")) {
-      deleteBookmark(event);
-    }
-  });
+  // Event listener for confirm delete button
+  DOMCache.getElement("#btn-confirm-delete").addEventListener("click", confirmDelete);
+
+  // Event listener for cancel delete button
+  DOMCache.getElement("#btn-cancel-delete").addEventListener("click", closeModal);
 
   // Add event listener to close the modal with the Escape key
   document.addEventListener("keydown", function (event) {
@@ -155,7 +160,6 @@ function renderBookmarks() {
   const bookmarksCount = DOMCache.getElement("#bookmarks-count");
   const searchQuery = DOMCache.getElement("#bookmarks-search").value.trim();
   const clearBtn = DOMCache.getElement("#btn-clear");
-  const noBookmarksFound = DOMCache.getElement("#no-bookmarks-found");
   const bookmarkList = [];
 
   bookmarks = filterBookmarks(searchQuery, bookmarks);
@@ -303,7 +307,6 @@ function editBookmark(event) {
 }
 
 function editBookmarkHandler(bookmarks, index, url, title) {
-  console.log("update handler triggered");
   const updatedBookmark = {
     url,
     title,
@@ -315,25 +318,43 @@ function editBookmarkHandler(bookmarks, index, url, title) {
   renderBookmarks();
 }
 
-function deleteBookmark(event) {
-  const bookmarkUrl = event.target.dataset.url;
+function showDeleteConfirmation(event) {
   const bookmarkElement = event.target.closest(".bookmark-item");
+  const bookmarkUrl = bookmarkElement.querySelector(".bookmark-delete").dataset.url;
+  const bookmarkTitle = bookmarkElement.querySelector(".bookmark-url").textContent.trim();
+  const deleteMessage = DOMCache.getElement(".delete-message");
+  deleteMessage.textContent = `Are you sure you want to delete the bookmark for "${bookmarkTitle}"?`;
+
+  // Attach the bookmark element to the confirm button as a dataset
+  const confirmButton = DOMCache.getElement("#btn-confirm-delete");
+  confirmButton.dataset.bookmarkUrl = bookmarkUrl;
+
+  openModal(null, "delete");
+}
+
+function confirmDelete() {
+  const confirmButton = DOMCache.getElement("#btn-confirm-delete");
+  const bookmarkUrl = confirmButton.dataset.bookmarkUrl;
   const bookmarks = loadBookmarks();
 
   const indexToDelete = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
   if (indexToDelete !== -1) {
     bookmarks.splice(indexToDelete, 1);
+    const bookmarkElement = document.querySelector(`.bookmark-delete[data-url="${bookmarkUrl}"]`).closest(".bookmark-item");
     bookmarkElement.remove();
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   } else {
     console.warn("Bookmark with URL", bookmarkUrl, "not found");
   }
+
+  // Clean up the dataset
+  delete confirmButton.dataset.bookmarkUrl;
+  closeModal();
 }
 
 // Function to show the overlay with modal
 function openModal(elementToFocus, displayModalContent) {
   const modal = DOMCache.getElement("#overlay");
-  const modalContent = DOMCache.getElement("#modal-content");
   modal.style.display = "flex";
 
   if (displayModalContent === "edit-content") {
@@ -344,6 +365,11 @@ function openModal(elementToFocus, displayModalContent) {
   if (displayModalContent === "warning-content") {
     const warningMarkup = DOMCache.getElement(".warning-content");
     warningMarkup.style.display = "block";
+  }
+
+  if (displayModalContent === "delete") {
+    const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
+    deleteConfirmationContent.style.display = "block";
   }
 
   // Store the element (input field) to be focused when the modal is closed
@@ -357,10 +383,12 @@ function closeModal() {
   const modal = DOMCache.getElement("#overlay");
   const editMarkup = DOMCache.getElement(".edit-content");
   const warningMarkup = DOMCache.getElement(".warning-content");
+  const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
 
   modal.style.display = "none";
   editMarkup.style.display = "none";
   warningMarkup.style.display = "none";
+  deleteConfirmationContent.style.display = "none";
 
   // Focus the stored element and remove it from cache
   if (modal.elementToFocus) {

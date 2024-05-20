@@ -288,8 +288,21 @@ summary {
 }
 
 .edit-content,
-.warning-content {
+.warning-content,
+.delete-confirmation-content {
+  margin: 1rem auto;
   display: none;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.buttons-wrapper button {
+  border: 1px solid var(--text-color);
+  border-radius: var(--border-radius);
 }
 
 .close {
