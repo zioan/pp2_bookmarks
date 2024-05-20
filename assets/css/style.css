@@ -64,7 +64,6 @@ button {
   font-size: 1rem;
   cursor: pointer;
   border: none;
-  border-radius: var(--border-radius);
   background: none;
   color: var(--text-color);
   padding: 0.5rem;
@@ -76,10 +75,11 @@ summary i:hover {
   transform: scale(1.2);
 }
 
-button:focus,
-input:focus,
-a:focus {
-  outline: 1px solid var(--text-color);
+button,
+input,
+a,
+summary {
+  outline: none;
 }
 
 .warning {
@@ -209,7 +209,6 @@ summary {
   margin-left: auto;
   border: none;
   border-radius: var(--border-radius);
-  outline: 1px solid var(--border-color);
 }
 
 .input-wrapper,
