@@ -11,6 +11,7 @@
   --box-shadow: var(--secondary-color) 0px -2px 6px 0px inset;
   --border-radius: 0.5rem;
   --tooltip-background-color: #2b2b2b;
+  --overlay-background-color: rgba(60, 49, 49, 0.8);
 }
 
 /* Reset default browser styles */
@@ -275,7 +276,7 @@ summary {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--secondary-color);
+  background-color: var(--overlay-background-color);
   z-index: 99;
   justify-content: center;
   align-items: center;
@@ -352,7 +353,7 @@ summary {
   height: 4rem;
   font-size: 2rem;
   color: var(--success-color);
-  background: var(--tooltip-background-color);
+  background: var(--overlay-background-color);
   border: 1px solid var(--success-color);
   border-radius: 50%;
   box-shadow: var(--box-shadow);
