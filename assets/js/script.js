@@ -89,7 +89,7 @@ function demoData() {
     },
     {
       url: "https://www.google.com/",
-      title: "",
+      title: "Google",
     },
   ];
 }
