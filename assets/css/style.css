@@ -9,6 +9,7 @@
   --text-color: #ffffff;
   --box-shadow: var(--secondary-color) 0px -2px 6px 0px inset;
   --border-radius: 0.5rem;
+  --tooltip-background-color: #2b2b2b;
 }
 
 /* Reset default browser styles */
@@ -93,6 +94,33 @@ summary {
 
 footer {
   border-top: 1px solid var(--secondary-color);
+}
+
+/* Tooltip for icons */
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: var(--tooltip-background-color);
+  color: var(--text-color);
+  text-align: left;
+  padding: 0.5rem;
+  font-size: 0.5rem;
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 1;
+}
+
+i:hover .tooltip,
+.icon-wrapper:hover .tooltip,
+button:hover .tooltip {
+  visibility: visible;
 }
 
 /* Search */
@@ -181,9 +209,8 @@ footer {
 summary {
   list-style-type: "";
   font-size: 2rem;
-  padding: 0.5rem;
 }
-
+/* remove summary arrow marker on all browsers */
 summary::-webkit-details-marker {
   display: none;
 }

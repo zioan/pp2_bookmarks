@@ -21,13 +21,17 @@
           <input type="text" id="bookmarks-search" placeholder="Search..." />
           <button id="btn-clear" aria-label="Clear Search">
             <i class="fa-solid fa-xmark"></i>
+            <span class="tooltip">Clear</span>
           </button>
         </div>
 
         <!-- Create New Bookmark -->
         <details>
           <summary>
+            <span class="icon-wrapper">
             <i class="fa-solid fa-plus" aria-label="Create new Bookmark"></i>
+              <span class="tooltip">New</span>
+            </span>
           </summary>
           <p>Create a new bookmark</p>
           <div class="input-wrapper">
@@ -35,6 +39,7 @@
             <input id="bookmark-title" type="text" placeholder="Bookmark title" />
             <button id="btn-save" aria-label="Add New Bookmark">
               <i class="fa-solid fa-floppy-disk"></i>
+              <span class="tooltip">Save</span>
             </button>
           </div>
         </details>
@@ -56,6 +61,7 @@
               <input id="edit-title" type="text" placeholder="Bookmark title" />
               <button id="btn-update" aria-label="Update Bookmark">
                 <i class="fa-solid fa-floppy-disk"></i>
+                <span class="tooltip">Save</span>
               </button>
             </div>
             <div class="warning-content"></div>

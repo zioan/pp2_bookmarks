@@ -134,11 +134,15 @@ function bookmarkMarkup(url, title) {
         ${title}
       </a>
       <div class="btn-group">
-        <button>
-          <i class="bookmark-edit fa-solid fa-pencil" data-url="${url}"></i>
+        <button aria-label="Edit bookmark">
+          <i class="bookmark-edit fa-solid fa-pencil" data-url="${url}">
+          </i>
+          <span class="tooltip">Edit</span>
         </button>
-        <button>
-          <i class="bookmark-delete fa-solid fa-trash" data-url="${url}"></i>
+        <button aria-label="Delete bookmark">
+          <i class="bookmark-delete fa-solid fa-trash" data-url="${url}">
+          </i>
+          <span class="tooltip">Delete</span>
         </button>
       </div>
     </li>
