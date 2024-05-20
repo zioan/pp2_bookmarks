@@ -295,14 +295,35 @@ summary {
   display: none;
 }
 
-.buttons-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
+.delete-confirmation-content {
+  margin: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--warning-color);
+  border-radius: var(--border-radius);
 }
 
-.buttons-wrapper button {
-  border: 1px solid var(--text-color);
+.delete-message {
+  text-align: center;
+}
+
+.buttons-wrapper {
+  max-width: 200px;
+  margin: 3rem auto 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#btn-confirm-delete {
+  color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+}
+
+#btn-cancel-delete {
+  border: 1px solid var(--input-background-color);
+}
+
+#btn-confirm-delete,
+#btn-cancel-delete {
   border-radius: var(--border-radius);
 }
 
