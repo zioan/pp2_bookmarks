@@ -190,7 +190,7 @@ function filterBookmarks(searchQuery, bookmarks) {
   const filteredBookmarks = [];
 
   for (let bookmark of bookmarks) {
-    if (bookmark.title.includes(searchQuery.trim())) {
+    if (bookmark.title.toLowerCase().includes(searchQuery.trim().toLowerCase())) {
       filteredBookmarks.push(bookmark);
     }
   }
