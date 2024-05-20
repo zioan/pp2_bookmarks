@@ -1,112 +1,148 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+## Table of Contents
 
-Welcome Ioan Zaharia,
+1. [Bookmark Manager](#bookmark-manager)
+   - [User Story](#user-story)
+   - [Acceptance Criteria](#acceptance-criteria)
+   - [Additional Notes](#additional-notes)
+2. [Features](#features)
+3. [Usage](#usage)
+4. [Technologies Used](#technologies-used)
+   - [Languages](#languages)
+   - [Tools](#tools)
+5. [Key Functionalities](#key-functionalities)
+6. [Manual Testing and Validation](#manual-testing-and-validation)
+   - [Performance Testing with Lighthouse](#performance-testing-with-lighthouse)
+   - [Accessibility Validation](#accessibility-validation)
+   - [HTML and CSS Validation](#html-and-css-validation)
+   - [JavaScript Functionality Testing](#javascript-functionality-testing)
+   - [Browser Compatibility Testing](#browser-compatibility-testing)
+7. [Version Control](#version-control)
+8. [Deployment](#deployment)
+9. [Credits](#credits)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Bookmark Manager
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **April 26, 2024**
+The Bookmark Manager is a JavaScript application that allows users to manage their bookmarks. Users can add, edit, delete, and search bookmarks. The application stores bookmark data locally using the browser's localStorage.
 
-## Gitpod Reminders
+## User Story
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+As a frequent internet user who often discovers interesting websites and resources, I want to organize and manage my bookmarks effectively, so that I can easily access them later and stay productive.
 
-`python3 -m http.server`
+### Acceptance Criteria
 
-A blue button should appear to click: _Make Public_,
+- As a user, I can add new bookmarks by providing the URL and a descriptive title.
+- I should be able to edit the titles or URLs of existing bookmarks if needed.
+- It's essential for me to remove bookmarks that I no longer need.
+- I need the ability to search through my bookmarks by title to quickly find what I'm looking for.
+- The application should provide a responsive design.
+- I expect the application to be intuitive and user-friendly, with clear instructions on how to use its features.
 
-Another blue button should appear to click: _Open Browser_.
+### Additional Notes
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+- It would be helpful to have features such as bookmark categorization or tagging to further organize my bookmarks.
+- Integration with third-party bookmark syncing services like Google Chrome Sync or Firefox Sync would enhance the usability of the application.
 
-A blue button should appear to click: _Make Public_,
+## Features
 
-Another blue button should appear to click: _Open Browser_.
+- **Save Bookmarks**: Add new bookmarks by providing a URL and a title.
+- **Edit Bookmarks**: Modify the URL and title of existing bookmarks.
+- **Delete Bookmarks**: Remove unwanted bookmarks from collection.
+- **Search Bookmarks**: Quickly find bookmarks by searching for keywords in their titles.
+- **Bookmark Validation**: Ensures that bookmarks have valid URLs and non-empty titles.
+- **Local Storage**: Bookmarks are stored locally in the browser, so the data persists across sessions.
+- **Responsive Design**: The application is optimized for various screen sizes and devices.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Usage
 
-To log into the Heroku toolbelt CLI:
+1. To add a new bookmark, enter the URL and title in the respective input fields, then click the "Save" button.
+2. To edit a bookmark, click the pencil icon next to the bookmark you want to modify. Update the URL and title, then click "Update".
+3. To delete a bookmark, click the trash icon next to the bookmark you want to remove, then confirm the deletion.
+4. To search for bookmarks, start typing in the search input field. The list will dynamically update to show matching bookmarks.
+5. To clear the search, click the "X" button or delete the text from the search input field.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Technologies Used
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+### Languages
 
-------
+- **HTML**: Used for creating the structure and layout of the web application.
+- **CSS**: Used for styling and design, enhancing the visual appearance of the application.
+- **JavaScript**: Used to implement the core functionality of the bookmark manager application.
 
-## Release History
+## Key Functionalities
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+- **Custom DOM Cache**:The Bookmark Manager utilizes a custom DOMCache object for caching DOM elements, improving performance by reducing repetitive code in retrieving elements from the document. This object enhances maintainability and readability while optimizing the application's efficiency.
 
-**April 26 2024:** Update node version to 16
+- **Search Functionality**: The Bookmark Manager features a robust search functionality, allowing users to quickly find bookmarks by title. Search results are dynamically updated as users type their query, providing real-time feedback and enhancing usability.
 
-**September 20 2023:** Update Python version to 3.9.17.
+- **Local Storage Integration**: Bookmark data is securely stored locally in the user's browser using the localStorage API. This integration enables data persistence across sessions, ensuring that users' bookmarks are retained even after closing and reopening the application.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+- **URL Validation and Feedback**: During bookmark creation or update, the application validates the URL to ensure it is correctly formatted and functional. Users receive immediate feedback and warning messages if the URL is incorrect or if any fields are left empty, enhancing data integrity and user experience. A visual feedback icon indicate successful operations.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## Manual Testing and Validation
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Performance Testing with Lighthouse
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+placeholder here
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+### Accessibility Validation
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+The Bookmark Manager application prioritizes accessibility to ensure inclusivity for all users. Accessibility features were thoroughly tested and validated, meeting industry standards for web accessibility.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+### HTML and CSS Validation
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+placeholder here
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### JavaScript Validation
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+Each JavaScript function within the Bookmark Manager application was meticulously tested for errors and functionality using the browser console and JSHint tool. This rigorous testing process ensures the reliability and efficiency of the JavaScript codebase.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+### Browser Compatibility Testing
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+The Bookmark Manager application underwent comprehensive browser compatibility testing across various web browsers, including:
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+- Google Chrome
+- Mozilla Firefox
+- Safari
+- Microsoft Edge
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Browser testing ensures that the application functions seamlessly and maintains consistent performance across different browsers, enhancing user experience and accessibility.
 
-------
+## Version Control
 
-## FAQ about the uptime script
+### My Git Workflow
 
-**Why have you added this script?**
+Throughout the development process, I utilized basic Git commands to manage version control effectively. I created a new repository on GitHub to host the application using Code Institute template for GitPod. All necessary files were included in the repository. Here are the main commands I used:
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+- git add <file>: Added specific files to the staging area before committing changes.
+- git add.: To add all files to the staging area before committing changes.
+- git commit -m "<message>": Commited the staged changes with descriptive messages to track the progress of the project.
+- git push: Pushed local commits to the remote repository on GitHub, ensuring that the latest changes were synchronized with the online repository.
+  By employing these commands, I maintained a structured and organized version control system.
 
-**How will this affect me?**
+## Deployment
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+### Hosting on GitHub Pages
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+For deploying the application, I utilized GitHub Pages. Here's how I deployed the application:
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+1. GitHub Pages Configuration: In the repository settings, I navigated to the "GitHub Pages" section and selected the main branch as the source for deployment.
 
-**So….?**
+2. Commit and Push: After ensuring that all changes were committed locally using git add and git commit, I pushed the commits to the remote repository using git push. This action triggered GitHub Pages to automatically build and deploy the application.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+By following these steps, I successfully deployed the application through the GitHub Pages.
 
-**Can I opt out?**
+## Credits
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+A special thanks to my mentor, Spence, for his constructive feedback and professional expertise.
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+MDN Web Docs: Valuable reference for JavaScript documentation, including event handling, DOM manipulation, local storage, form validation, and error handling techniques.
 
-**Anything more?**
+CSS-Tricks: Helpful resource for CSS styling and responsive design principles.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+W3Schools: Comprehensive tutorials and references for HTML, CSS, and JavaScript, providing insights into various programming concepts and techniques used in the project.
 
----
+Can I Use: Essential resource for checking browser compatibility and understanding web technology support across different browsers.
 
-Happy coding!
+The implementation of URL validation was influenced by an informative <a href="https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/" target="_blank">article</a> I found on FreeCodeCamp.org. Beyond this specific article, I didn't directly utilize code from other sources. My previous professional experience as a web developer and the learning materials from Code Institute was the main source of knowledge in building this application.
+
+<a href="#table-of-contents">Back to Top</a>
