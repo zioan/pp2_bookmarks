@@ -183,13 +183,12 @@ button:hover .tooltip {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  word-break: break-all;
   border-radius: var(--border-radius);
 }
 
 .bookmark-url i {
   font-size: 0.75rem;
-  color: var(--border-color);
+  color: var(--text-color);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
