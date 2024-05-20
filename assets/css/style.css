@@ -93,6 +93,14 @@ summary {
   border-radius: var(--border-radius);
 }
 
+.warning-color {
+  color: var(--warning-color);
+}
+
+.success-color {
+  color: var(--success-color);
+}
+
 footer {
   border-top: 1px solid var(--secondary-color);
 }
@@ -157,7 +165,6 @@ button:hover .tooltip {
 }
 
 #bookmarks-count {
-  color: var(--warning-color);
   text-align: center;
   margin: 1rem 0;
   display: none;

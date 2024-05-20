@@ -169,11 +169,14 @@ function renderBookmarks() {
     bookmarksCount.style.display = "block";
 
     if (!bookmarks.length) {
-      bookmarksCount.innerText = `No bookmarks found`;
+      bookmarksCount.innerText = `No bookmarks found!`;
+      bookmarksCount.className = "warning-color";
     } else if (bookmarks.length === 1) {
       bookmarksCount.innerText = `1 bookmark found`;
+      bookmarksCount.className = "success-color";
     } else {
       bookmarksCount.innerText = `${bookmarks.length} bookmarks found`;
+      bookmarksCount.className = "success-color";
     }
   } else {
     clearBtn.style.display = "none";
