@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Meta tags for SEO -->
-    <meta name="description" content="Bookmarks app" />
-    <meta name="keywords" content="bookmarks, bookmarks app" />
-    <meta name="author" content="Ioan Zaharia" />
-    <title>Bookmarks app</title>
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
 
-  <body>
-    <div id="container">
-      <h1>Bookmarks App</h1>
-      <div class="wrapper">
-        <!-- Search -->
-        <div id="search-wrapper">
-          <input type="text" id="bookmarks-search" placeholder="Search..." />
-          <button id="btn-clear" aria-label="Clear Search">
-            <i class="fa-solid fa-xmark"></i>
-            <span class="tooltip">Clear</span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Meta tags for SEO -->
+  <meta name="description" content="Bookmarks app">
+  <meta name="keywords" content="bookmarks, bookmarks app">
+  <meta name="author" content="Ioan Zaharia">
+  <title>Bookmarks app</title>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <h1>Bookmarks App</h1>
+    <div class="wrapper">
+      <!-- Search -->
+      <div id="search-wrapper">
+        <input type="text" id="bookmarks-search" placeholder="Search...">
+        <button id="btn-clear" aria-label="Clear Search">
+          <i class="fa-solid fa-xmark"></i>
+          <span class="tooltip">Clear</span>
+        </button>
+      </div>
+
+      <!-- Create New Bookmark -->
+      <details>
+        <summary>
+          <span class="icon-wrapper">
+            <i class="fa-solid fa-plus"></i>
+            <span class="tooltip">New</span>
+          </span>
+        </summary>
+        <p>Create a new bookmark</p>
+        <div class="input-wrapper">
+          <input id="bookmark-url" type="text" placeholder="Bookmark url*">
+          <input id="bookmark-title" type="text" placeholder="Bookmark title">
+          <button id="btn-save" aria-label="Add New Bookmark">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span class="tooltip">Save</span>
           </button>
         </div>
+      </details>
 
-        <!-- Create New Bookmark -->
-        <details>
-          <summary>
-            <span class="icon-wrapper">
-              <i class="fa-solid fa-plus" aria-label="Create new Bookmark"></i>
-              <span class="tooltip">New</span>
-            </span>
-          </summary>
-          <p>Create a new bookmark</p>
-          <div class="input-wrapper">
-            <input id="bookmark-url" type="text" placeholder="Bookmark url*" />
-            <input id="bookmark-title" type="text" placeholder="Bookmark title" />
-            <button id="btn-save" aria-label="Add New Bookmark">
+      <!-- Bookmarks List -->
+      <p id="bookmarks-count"></p>
+      <span class="success-feedback">
+        <i class="fa-solid fa-check"></i>
+      </span>
+      <div id="bookmarks">
+        <ul class="bookmark-list"></ul>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="overlay">
+      <div class="modal">
+        <i class="fa-solid fa-xmark close" onclick="closeModal()"></i>
+        <div id="modal-content">
+          <div class="edit-content">
+            <input id="edit-url" type="text" placeholder="Bookmark url*">
+            <input id="edit-title" type="text" placeholder="Bookmark title">
+            <button id="btn-update" aria-label="Update Bookmark">
               <i class="fa-solid fa-floppy-disk"></i>
               <span class="tooltip">Save</span>
             </button>
           </div>
-        </details>
-
-        <!-- Bookmarks List -->
-        <p id="bookmarks-count"></p>
-        <span class="success-feedback">
-          <i class="fa-solid fa-check"></i>
-        </span>
-        <div id="bookmarks">
-          <ul class="bookmark-list"></ul>
-        </div>
-      </div>
-
-      <!-- Modal -->
-      <div id="overlay">
-        <div class="modal">
-          <i class="fa-solid fa-xmark close" aria-label="Close modal" onclick="closeModal()"></i>
-          <div id="modal-content">
-            <div class="edit-content">
-              <input id="edit-url" type="text" placeholder="Bookmark url*" />
-              <input id="edit-title" type="text" placeholder="Bookmark title" />
-              <button id="btn-update" aria-label="Update Bookmark">
-                <i class="fa-solid fa-floppy-disk"></i>
-                <span class="tooltip">Save</span>
-              </button>
-            </div>
-            <div class="warning-content"></div>
-            <div class="delete-confirmation-content">
-              <p class="delete-message"></p>
-              <div class="buttons-wrapper">
-                <button id="btn-confirm-delete">Confirm</button>
-                <button id="btn-cancel-delete">Cancel</button>
-              </div>
+          <div class="warning-content"></div>
+          <div class="delete-confirmation-content">
+            <p class="delete-message"></p>
+            <div class="buttons-wrapper">
+              <button id="btn-confirm-delete">Confirm</button>
+              <button id="btn-cancel-delete">Cancel</button>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Footer -->
-      <footer>
-        <p>Made By <a href="http://ioanzaharia.com" target="_blank" rel="noopener noreferrer">Ioan Zaharia</a></p>
-      </footer>
     </div>
 
-    <!-- Font Awesome kit -->
-    <script src="https://kit.fontawesome.com/3b20d96fa9.js" crossorigin="anonymous"></script>
+    <!-- Footer -->
+    <footer>
+      <p>Made By <a href="http://ioanzaharia.com" target="_blank" rel="noopener noreferrer">Ioan Zaharia</a></p>
+    </footer>
+  </div>
 
-    <script src="assets/js/script.js"></script>
-  </body>
+  <!-- Font Awesome kit -->
+  <script src="https://kit.fontawesome.com/3b20d96fa9.js" crossorigin="anonymous"></script>
+
+  <script src="assets/js/script.js"></script>
+</body>
+
 </html>
