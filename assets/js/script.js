@@ -453,24 +453,40 @@ function showDeleteConfirmation(event) {
   openModal(null, "delete");
 }
 
+/**
+ * Handles the deletion of a bookmark after confirmation.
+ */
 function confirmDelete() {
+  // Retrieve the URL of the bookmark to delete from the confirm button's dataset
   const confirmButton = DOMCache.getElement("#btn-confirm-delete");
   const bookmarkUrl = confirmButton.dataset.bookmarkUrl;
+
+  // Load bookmarks from local storage
   const bookmarks = loadBookmarks();
 
+  // Find the index of the bookmark to delete
   const indexToDelete = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
+
+  // If the bookmark is found, remove it from the array and update local storage
   if (indexToDelete !== -1) {
     bookmarks.splice(indexToDelete, 1);
+
+    // Remove the corresponding bookmark element from the DOM
     const bookmarkElement = document.querySelector(`.bookmark-delete[data-url="${bookmarkUrl}"]`).closest(".bookmark-item");
     bookmarkElement.remove();
+
+    // Update local storage with the modified bookmarks
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   } else {
+    // If the bookmark is not found, log a warning message
     console.warn("Bookmark with URL", bookmarkUrl, "not found");
   }
 
-  // Clean up the dataset
+  // Clean up the dataset and close the modal
   delete confirmButton.dataset.bookmarkUrl;
   closeModal();
+
+  // Display success feedback to the user
   displaySuccessFeedback();
 }
 
