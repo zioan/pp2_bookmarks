@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * @namespace DOMCache
- * @description This global object stores DOM elements in a cache to minimize global variable pollution,
- *              improve code maintainability, and reduce repetitive DOM queries.
+ * This global object stores DOM elements in a cache to minimize global variable pollution,
+ * improve code maintainability, and reduce repetitive DOM queries.
  */
 const DOMCache = {
   cache: {},
@@ -339,7 +338,7 @@ function editBookmark(event) {
   // Open the edit modal
   const displayModalContent = "edit-content";
   modalTitle.innerText = `Editing: "${bookmarkToUpdate.title}"`;
-  openModal("", displayModalContent);
+  openModal(displayModalContent);
 }
 
 /**
@@ -397,7 +396,7 @@ function showDeleteConfirmation(event) {
   confirmButton.dataset.bookmarkUrl = bookmarkUrl;
 
   // Open the delete confirmation modal
-  openModal(null, "delete");
+  openModal("delete");
 }
 
 /**
@@ -489,11 +488,9 @@ function validateFields(urlInputField, titleInputField) {
 
 /**
  * Opens a modal with specified content and optionally focuses on a specific input field.
- *
- * @param {HTMLElement} elementToFocus - The element to focus when the modal is closed.
  * @param {string} displayModalContent - The type of modal content to display.
  */
-function openModal(elementToFocus, displayModalContent) {
+function openModal(displayModalContent) {
   // Get the modal element
   const modal = DOMCache.getElement("#overlay");
 
@@ -509,11 +506,6 @@ function openModal(elementToFocus, displayModalContent) {
   if (displayModalContent === "delete") {
     const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
     deleteConfirmationContent.style.display = "block";
-  }
-
-  // Store the element (input field) to be focused when the modal is closed
-  if (elementToFocus) {
-    modal.elementToFocus = elementToFocus;
   }
 }
 
@@ -534,10 +526,4 @@ function closeModal() {
 
   // Reset the Safari warning display
   safariWarning.style.display = "none";
-
-  // Focus the stored element (if any) and remove it from cache
-  if (modal.elementToFocus) {
-    modal.elementToFocus.focus();
-    delete modal.elementToFocus;
-  }
 }
