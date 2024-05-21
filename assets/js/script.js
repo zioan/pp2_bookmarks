@@ -67,27 +67,6 @@ const DOMCache = {
 
     return element;
   },
-
-  /**
-   * Retrieves a NodeList of DOM elements by their selector.
-   * If the elements are already cached, returns the cached NodeList.
-   * Otherwise, queries the DOM, caches the NodeList, and then returns it.
-   *
-   * @param {string} selector - The CSS selector of the elements to retrieve.
-   * @returns {NodeList} A NodeList of DOM elements matching the selector.
-   */
-  getElements: function (selector) {
-    // Check if the element is already cached
-    if (this.cache.hasOwnProperty(selector)) {
-      return this.cache[selector];
-    }
-
-    // Query the DOM and cache the elements
-    const elements = document.querySelectorAll(selector);
-    this.cache[selector] = elements;
-
-    return elements;
-  },
 };
 
 /**
