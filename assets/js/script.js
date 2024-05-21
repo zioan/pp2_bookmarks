@@ -11,19 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark);
 
-  // Event listeners for edit and delete handlers that open the modal
-  DOMCache.getElements(".bookmark-item").forEach(function (button) {
-    button.addEventListener("click", function (event) {
-      const target = event.target;
-
-      // Check if the clicked element is an edit or delete button
-      if (target.classList.contains("bookmark-edit")) {
-        editBookmark(event); // Open edit modal
-      } else if (target.classList.contains("bookmark-delete")) {
-        showDeleteConfirmation(event); // Open delete confirmation modal
-      }
-    });
-  });
+  // Event listener for edit and delete handlers that open the modal
+  DOMCache.getElement(".bookmark-list").addEventListener("click", handleBookmarkItemClick);
 
   // Event listener for confirm delete button
   DOMCache.getElement("#btn-confirm-delete").addEventListener("click", confirmDelete);
@@ -100,6 +89,22 @@ const DOMCache = {
     return elements;
   },
 };
+
+/**
+ * Handles click events on bookmark items, triggering actions based on the clicked element.
+ * If the clicked element has a class of "bookmark-edit", opens the edit modal.
+ * If the clicked element has a class of "bookmark-delete", opens the delete confirmation modal.
+ *
+ * @param {Event} event - The event object representing the click event.
+ */
+function handleBookmarkItemClick(event) {
+  const target = event.target;
+  if (target.classList.contains("bookmark-edit")) {
+    editBookmark(event); // Open edit modal
+  } else if (target.classList.contains("bookmark-delete")) {
+    showDeleteConfirmation(event); // Open delete confirmation modal
+  }
+}
 
 /**
  * Provides a set of demo data containing URLs and titles.
