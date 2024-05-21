@@ -365,3 +365,17 @@ summary {
 footer a {
   color: var(--text-color);
 }
+
+/* Media query for screens smaller than 576px */
+@media screen and (max-width: 576px) {
+  .input-wrapper,
+  .edit-content {
+    flex-direction: column;
+    align-items: normal;
+  }
+
+  #btn-save,
+  #btn-update {
+    align-self: flex-end;
+  }
+}
