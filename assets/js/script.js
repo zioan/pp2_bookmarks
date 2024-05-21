@@ -185,6 +185,10 @@ function bookmarkMarkup(url, title) {
   `;
 }
 
+/**
+ * Renders the bookmarks list based on the current search query.
+ * It loads bookmarks, filters them based on the search query, and updates the DOM accordingly.
+ */
 function renderBookmarks() {
   let bookmarks = loadBookmarks();
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
@@ -193,6 +197,7 @@ function renderBookmarks() {
   const clearBtn = DOMCache.getElement("#btn-clear");
   const bookmarkList = [];
 
+  // Filter bookmarks based on the search query
   bookmarks = filterBookmarks(searchQuery, bookmarks);
 
   if (searchQuery) {
@@ -214,10 +219,12 @@ function renderBookmarks() {
     bookmarksCount.style.display = "none";
   }
 
+  // Generate the HTML markup for each bookmark
   for (let bookmark of bookmarks) {
     bookmarkList.push(bookmarkMarkup(bookmark.url, bookmark.title));
   }
 
+  // Update the DOM with the generated bookmark list
   bookmarksSection.innerHTML = bookmarkList.join("");
 }
 
