@@ -172,6 +172,10 @@ A special thanks to my mentor, Spence.
 
 - [Can I Use](https://caniuse.com/): Essential resource for checking browser compatibility and understanding web technology support across different browsers.
 
-- The implementation of URL validation was influenced by an informative [article](https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/) I found on FreeCodeCamp.org. Beyond this specific article, I didn't directly utilize code from other sources. My previous professional experience as a web developer and the learning materials from Code Institute was the main source of knowledge in building this application.
+- The implementation of URL validation was influenced by an informative [article](https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/) I found on FreeCodeCamp.org.
+
+- The implementation of isSafari function to check if the browser is Safari was influenced by this [thread](https://stackoverflow.com/questions/7944460/detect-safari-browser) on StackOverflow.
+
+- Beyond this, I didn't directly utilize code from other sources. My previous professional experience as a web developer and the learning materials from Code Institute was the main source of knowledge in building this application.
 
 <a href="#bookmark-manager">Back to Top</a>
