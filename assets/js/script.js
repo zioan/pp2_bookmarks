@@ -399,7 +399,7 @@ function editBookmark(event) {
  * Updates the bookmark at the specified index with the provided URL and title,
  * then updates the local storage, closes the modal, renders the updated bookmarks,
  * and displays success feedback to the user.
- * 
+ *
  * @param {Array<Object>} bookmarks - The array of bookmark objects.
  * @param {number} index - The index of the bookmark to update.
  * @param {string} url - The updated URL of the bookmark.
@@ -428,17 +428,28 @@ function editBookmarkHandler(bookmarks, index, url, title) {
   displaySuccessFeedback();
 }
 
+/**
+ * Displays a confirmation modal for deleting a bookmark.
+ *
+ * @param {Event} event - The event object representing the click event.
+ */
 function showDeleteConfirmation(event) {
+  // Find the closest bookmark item element to the clicked button
   const bookmarkElement = event.target.closest(".bookmark-item");
+
+  // Extract the URL and title of the bookmark to be deleted
   const bookmarkUrl = bookmarkElement.querySelector(".bookmark-delete").dataset.url;
   const bookmarkTitle = bookmarkElement.querySelector(".bookmark-url").textContent.trim();
+
+  // Update the delete message in the confirmation modal
   const deleteMessage = DOMCache.getElement(".delete-message");
   deleteMessage.textContent = `Are you sure you want to delete "${bookmarkTitle}"?`;
 
-  // Attach the bookmark element to the confirm button as a dataset
+  // Attach the URL of the bookmark to the confirm button as a dataset
   const confirmButton = DOMCache.getElement("#btn-confirm-delete");
   confirmButton.dataset.bookmarkUrl = bookmarkUrl;
 
+  // Open the delete confirmation modal
   openModal(null, "delete");
 }
 
