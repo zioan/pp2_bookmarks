@@ -61,12 +61,13 @@
         <i class="fa-solid fa-xmark close" onclick="closeModal()"></i>
         <div id="modal-content">
           <div class="edit-content">
-            <input id="edit-url" type="url" placeholder="https://example.com">
-            <input id="edit-title" type="text" placeholder="Bookmark title">
+            <input id="edit-url" type="url" placeholder="https://example.com" required>
+            <input id="edit-title" type="text" placeholder="Bookmark title" required>
             <button id="btn-update" aria-label="Update Bookmark">
               <i class="fa-solid fa-floppy-disk"></i>
               <span class="tooltip">Save</span>
             </button>
+            <p class="safari-warning">Please enter a valid URL and title</p>
           </div>
           <div class="warning-content"></div>
           <div class="delete-confirmation-content">

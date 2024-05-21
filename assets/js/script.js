@@ -241,7 +241,7 @@ function filterBookmarks(searchQuery, bookmarks) {
 /**
  * Checks if a given URL is valid by attempting to create a new URL object from it.
  * A URL is considered valid if it has either the "http" or "https" protocol.
- *
+ * This function is used if the reportValidity API cannot validate the URL, as in the case of the Safari browser.
  * @param {string} url - The URL to validate.
  * @returns {boolean} True if the URL is valid, otherwise false.
  */
@@ -316,7 +316,7 @@ function createNewBookmark() {
   const url = bookmarkUrl.value;
   const title = bookmarkTitle.value;
 
-  // Validate the provided URL and title. If the validation fails, stops the execution of the function early.
+  // Validate the provided URL and title. If the validation fails, stops the execution of the function early and open warning modal.
   if (!validateBookmark(url, title, bookmarkUrl, bookmarkTitle)) {
     return;
   }
@@ -358,6 +358,7 @@ function editBookmark(event) {
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
   const editUrl = DOMCache.getElement("#edit-url");
   const editTitle = DOMCache.getElement("#edit-title");
+  const safariWarning = DOMCache.getElement(".safari-warning");
 
   // Find the index of the bookmark to edit
   const indexToEdit = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
@@ -372,8 +373,29 @@ function editBookmark(event) {
   editUrl.value = bookmarkToUpdate.url;
   editTitle.value = bookmarkToUpdate.title;
 
+  // Reset the Safari warning display
+  safariWarning.style.display = "none";
+
   // Add event listener to the update button
   DOMCache.getElement("#btn-update").addEventListener("click", function () {
+    const isSafariBrowser = isSafari();
+
+    // URL and title validation for Safari browser
+    if (isSafariBrowser && (!isValidUrl(editUrl.value) || editTitle.value === "")) {
+      safariWarning.style.display = "block";
+      return;
+    }
+
+    // URL and title validation for other browsers using the reportValidity API
+    if (!editUrl.reportValidity()) {
+      return;
+    }
+
+    if (!editTitle.reportValidity()) {
+      return;
+    }
+
+    // If all validations are successful, continue with the edit helper function
     editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value);
   });
 
@@ -491,6 +513,20 @@ function displaySuccessFeedback() {
   setTimeout(() => {
     successFeedback.style.display = "none";
   }, 1500);
+}
+
+/**
+ * This function checks the user agent string of the browser to determine if the browser
+ * is Safari. It does so by converting the user agent string to lowercase and then checking
+ * for the presence of the substring "safari" and the absence of the substring "chrome".
+ * This is because Safari's user agent string contains "safari", but does not contain "chrome",
+ * whereas other browsers like Chrome and Edge might also include "safari" but will include "chrome" as well.
+ *
+ * @returns {boolean} True if the browser is Safari, otherwise false.
+ */
+function isSafari() {
+  const ua = navigator.userAgent.toLowerCase();
+  return ua.includes("safari") && !ua.includes("chrome");
 }
 
 /**

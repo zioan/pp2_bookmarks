@@ -302,6 +302,12 @@ summary {
   display: none;
 }
 
+.safari-warning {
+  color: var(--warning-color);
+  margin: 0 auto;
+  display: none;
+}
+
 .delete-confirmation-content {
   margin: 0.5rem;
   padding: 1rem;
