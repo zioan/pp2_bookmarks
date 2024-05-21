@@ -360,24 +360,38 @@ function createNewBookmark() {
   displaySuccessFeedback();
 }
 
+/**
+ * Handles the editing of a bookmark by populating the edit form with the bookmark's data.
+ *
+ * @param {Event} event - The event object representing the click event.
+ * @returns {void} Returns early if the bookmark URL is not found.
+ */
 function editBookmark(event) {
   const bookmarkUrl = event.target.dataset.url;
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
   const editUrl = DOMCache.getElement("#edit-url");
   const editTitle = DOMCache.getElement("#edit-title");
 
+  // Find the index of the bookmark to edit
   const indexToEdit = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
-  const bookmarkToUpdate = bookmarks[indexToEdit];
 
+  // If the bookmark URL is not found, return early
+  if (indexToEdit === -1) {
+    return;
+  }
+
+  // Extract the bookmark data to populate the edit form
+  const bookmarkToUpdate = bookmarks[indexToEdit];
   editUrl.value = bookmarkToUpdate.url;
   editTitle.value = bookmarkToUpdate.title;
 
+  // Add event listener to the update button
   DOMCache.getElement("#btn-update").addEventListener("click", function () {
     editBookmarkHandler(bookmarks, indexToEdit, editUrl.value, editTitle.value);
   });
 
+  // Open the edit modal
   const displayModalContent = "edit-content";
-
   openModal("", displayModalContent);
 }
 
