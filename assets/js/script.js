@@ -229,7 +229,11 @@ function renderBookmarks() {
 }
 
 /**
- * Filters the array of bookmarks based on a search query.
+ * Filters bookmarks based on the search query.
+ *
+ * @param {string} searchQuery - The search query used to filter bookmarks.
+ * @param {Array<Object>} bookmarks - The array of bookmark objects to filter.
+ * @returns {Array<Object>} The filtered array of bookmark objects.
  */
 function filterBookmarks(searchQuery, bookmarks) {
   if (!searchQuery) {
@@ -248,7 +252,11 @@ function filterBookmarks(searchQuery, bookmarks) {
 }
 
 /**
- * Check if the URL is valid.
+ * Checks if a given URL is valid by attempting to create a new URL object from it.
+ * A URL is considered valid if it has either the "http" or "https" protocol.
+ *
+ * @param {string} url - The URL to validate.
+ * @returns {boolean} True if the URL is valid, otherwise false.
  */
 function isValidUrl(url) {
   try {
