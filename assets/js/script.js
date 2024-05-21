@@ -267,6 +267,16 @@ function isValidUrl(url) {
   }
 }
 
+/**
+ * Validates a bookmark by checking if the URL and title are empty, if the URL is valid,
+ * and displays appropriate warning messages if any validation fails.
+ *
+ * @param {string} url - The URL of the bookmark.
+ * @param {string} title - The title of the bookmark.
+ * @param {string} bookmarkUrl - The URL input field for the bookmark.
+ * @param {string} bookmarkTitle - The title input field for the bookmark.
+ * @returns {boolean} True if the bookmark is valid, otherwise false.
+ */
 function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
   const modalContent = DOMCache.getElement(".warning-content");
   const createWarningMessage = (message) => `<p class='warning'>${message}</p>`;
