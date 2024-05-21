@@ -506,11 +506,20 @@ function displaySuccessFeedback() {
   }, 1500);
 }
 
-// Function to show the overlay with modal
+/**
+ * Opens a modal with specified content and optionally focuses on a specific input field.
+ *
+ * @param {HTMLElement} elementToFocus - The element to focus when the modal is closed.
+ * @param {string} displayModalContent - The type of modal content to display.
+ */
 function openModal(elementToFocus, displayModalContent) {
+  // Get the modal element
   const modal = DOMCache.getElement("#overlay");
+
+  // Display the modal
   modal.style.display = "flex";
 
+  // Display specific modal content based on the provided type
   if (displayModalContent === "edit-content") {
     const editMarkup = DOMCache.getElement(".edit-content");
     editMarkup.style.display = "flex";
@@ -532,19 +541,23 @@ function openModal(elementToFocus, displayModalContent) {
   }
 }
 
-// Function to hide the overlay with modal
+/**
+ * Hides the overlay and closes the modal, resetting its display state.
+ */
 function closeModal() {
+  // Get the modal and specific modal content elements
   const modal = DOMCache.getElement("#overlay");
   const editMarkup = DOMCache.getElement(".edit-content");
   const warningMarkup = DOMCache.getElement(".warning-content");
   const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
 
+  // Hide the overlay and all modal content
   modal.style.display = "none";
   editMarkup.style.display = "none";
   warningMarkup.style.display = "none";
   deleteConfirmationContent.style.display = "none";
 
-  // Focus the stored element and remove it from cache
+  // Focus the stored element (if any) and remove it from cache
   if (modal.elementToFocus) {
     modal.elementToFocus.focus();
     delete modal.elementToFocus;
