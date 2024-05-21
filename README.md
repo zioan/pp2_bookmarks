@@ -164,6 +164,8 @@ For deploying the application, I utilized [GitHub Pages](https://pages.github.co
 
 A special thanks to my mentor, Spence.
 
+- The favicon was made using [favicon.io](https://favicon.io/)
+
 - [MDN Web Docs](https://developer.mozilla.org/): Valuable reference for JavaScript documentation, including event handling, DOM manipulation, local storage, form validation, and error handling techniques.
 
 - [CSS-Tricks](https://css-tricks.com/): Helpful resource for CSS styling and responsive design principles.
