@@ -1,8 +1,8 @@
 // Code that is executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Functions that must be loaded initially
-  loadBookmarks();
-  renderBookmarks();
+  loadBookmarks(); // Load bookmarks from local storage
+  renderBookmarks(); // Render bookmarks initially
 
   // Event listeners for the search functionality
   DOMCache.getElement("#btn-clear").addEventListener("click", clearSearchHandler);
@@ -13,13 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listeners for edit and delete handlers that open the modal
   DOMCache.getElements(".bookmark-item").forEach(function (button) {
-    addEventListener("click", function (event) {
+    button.addEventListener("click", function (event) {
       const target = event.target;
 
+      // Check if the clicked element is an edit or delete button
       if (target.classList.contains("bookmark-edit")) {
-        editBookmark(event);
+        editBookmark(event); // Open edit modal
       } else if (target.classList.contains("bookmark-delete")) {
-        showDeleteConfirmation(event);
+        showDeleteConfirmation(event); // Open delete confirmation modal
       }
     });
   });
@@ -32,16 +33,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add event listener to close the modal with the Escape key
   document.addEventListener("keydown", function (event) {
+    // Listen for keydown events
     const modal = document.querySelector(".modal");
     if (modal && event.key === "Escape") {
+      // Check if Escape key is pressed
       closeModal();
     }
   });
 
   // Prevent the overlay from closing if the click is inside the modal
-  const overlay = DOMCache.getElement("#overlay");
-  overlay.addEventListener("click", function (event) {
+  DOMCache.getElement("#overlay").addEventListener("click", function (event) {
     if (!event.target.closest(".modal")) {
+      // Check if the clicked element is not inside the modal
       closeModal();
     }
   });
