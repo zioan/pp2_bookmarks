@@ -102,6 +102,12 @@ summary {
   color: var(--success-color);
 }
 
+.description {
+  width: 100%;
+  text-align: center;
+  text-decoration: underline;
+}
+
 footer {
   border-top: 1px solid var(--secondary-color);
 }
@@ -231,11 +237,6 @@ details {
 
 details[open] > summary i {
   color: var(--secondary-color);
-}
-
-details p {
-  text-align: center;
-  text-decoration: underline;
 }
 
 summary {

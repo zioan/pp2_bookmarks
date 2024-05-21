@@ -316,8 +316,9 @@ function createNewBookmark() {
   const url = bookmarkUrl.value;
   const title = bookmarkTitle.value;
 
-  // Validate the provided URL and title. If the validation fails, stops the execution of the function early and open warning modal.
-  if (!validateBookmark(url, title, bookmarkUrl, bookmarkTitle)) {
+  // Perform initial validation on the fields. If validation fails, return early to prevent further processing.
+  // The validateFields function handles the validation logic and provides appropriate feedback.
+  if (!validateFields(bookmarkUrl, bookmarkTitle)) {
     return;
   }
 
@@ -358,7 +359,7 @@ function editBookmark(event) {
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
   const editUrl = DOMCache.getElement("#edit-url");
   const editTitle = DOMCache.getElement("#edit-title");
-  const safariWarning = DOMCache.getElement(".safari-warning");
+  const modalTitle = DOMCache.getElement(".modal-title");
 
   // Find the index of the bookmark to edit
   const indexToEdit = bookmarks.findIndex((bookmark) => bookmark.url === bookmarkUrl);
@@ -373,25 +374,11 @@ function editBookmark(event) {
   editUrl.value = bookmarkToUpdate.url;
   editTitle.value = bookmarkToUpdate.title;
 
-  // Reset the Safari warning display
-  safariWarning.style.display = "none";
-
   // Add event listener to the update button
   DOMCache.getElement("#btn-update").addEventListener("click", function () {
-    const isSafariBrowser = isSafari();
-
-    // URL and title validation for Safari browser
-    if (isSafariBrowser && (!isValidUrl(editUrl.value) || editTitle.value === "")) {
-      safariWarning.style.display = "block";
-      return;
-    }
-
-    // URL and title validation for other browsers using the reportValidity API
-    if (!editUrl.reportValidity()) {
-      return;
-    }
-
-    if (!editTitle.reportValidity()) {
+    // Perform initial validation on the fields. If validation fails, return early to prevent further processing.
+    // The validateFields function handles the validation logic and provides appropriate feedback.
+    if (!validateFields(editUrl, editTitle)) {
       return;
     }
 
@@ -401,6 +388,7 @@ function editBookmark(event) {
 
   // Open the edit modal
   const displayModalContent = "edit-content";
+  modalTitle.innerText = `Editing: "${bookmarkToUpdate.title}"`;
   openModal("", displayModalContent);
 }
 
@@ -515,18 +503,29 @@ function displaySuccessFeedback() {
   }, 1500);
 }
 
-/**
- * This function checks the user agent string of the browser to determine if the browser
- * is Safari. It does so by converting the user agent string to lowercase and then checking
- * for the presence of the substring "safari" and the absence of the substring "chrome".
- * This is because Safari's user agent string contains "safari", but does not contain "chrome",
- * whereas other browsers like Chrome and Edge might also include "safari" but will include "chrome" as well.
- *
- * @returns {boolean} True if the browser is Safari, otherwise false.
- */
-function isSafari() {
+function validateFields(urlInputField, titleInputField) {
+  const safariWarning = DOMCache.getElement(".safari-warning");
+
+  // Check if the browser is safari
   const ua = navigator.userAgent.toLowerCase();
-  return ua.includes("safari") && !ua.includes("chrome");
+  const isSafariBrowser = ua.includes("safari") && !ua.includes("chrome");
+
+  // URL and title validation for Safari browser
+  if (isSafariBrowser && (!isValidUrl(urlInputField.value) || titleInputField.value === "")) {
+    safariWarning.style.display = "block";
+    return false;
+  }
+
+  // URL and title validation for other browsers using the reportValidity API
+  if (!urlInputField.reportValidity()) {
+    return false;
+  }
+
+  if (!titleInputField.reportValidity()) {
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -571,14 +570,17 @@ function closeModal() {
   // Get the modal and specific modal content elements
   const modal = DOMCache.getElement("#overlay");
   const editMarkup = DOMCache.getElement(".edit-content");
-  const warningMarkup = DOMCache.getElement(".warning-content");
   const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
+  const safariWarning = DOMCache.getElement(".safari-warning");
 
   // Hide the overlay and all modal content
   modal.style.display = "none";
   editMarkup.style.display = "none";
   warningMarkup.style.display = "none";
   deleteConfirmationContent.style.display = "none";
+
+  // Reset the Safari warning display
+  safariWarning.style.display = "none";
 
   // Focus the stored element (if any) and remove it from cache
   if (modal.elementToFocus) {

@@ -34,10 +34,10 @@
             <span class="tooltip">New</span>
           </span>
         </summary>
-        <p>Create a new bookmark</p>
+        <p class="description">Create a new bookmark</p>
         <div class="input-wrapper">
-          <input id="bookmark-url" type="url" placeholder="https://example.com">
-          <input id="bookmark-title" type="text" placeholder="Bookmark title">
+          <input id="bookmark-url" type="url" placeholder="https://example.com" required>
+          <input id="bookmark-title" type="text" placeholder="Bookmark title" required>
           <button id="btn-save" aria-label="Add New Bookmark">
             <i class="fa-solid fa-floppy-disk"></i>
             <span class="tooltip">Save</span>
@@ -61,6 +61,7 @@
         <i class="fa-solid fa-xmark close" onclick="closeModal()"></i>
         <div id="modal-content">
           <div class="edit-content">
+            <p class="description modal-title"></p>
             <input id="edit-url" type="url" placeholder="https://example.com" required>
             <input id="edit-title" type="text" placeholder="Bookmark title" required>
             <button id="btn-update" aria-label="Update Bookmark">
