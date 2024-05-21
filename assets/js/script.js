@@ -317,6 +317,10 @@ function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
   return true;
 }
 
+/**
+ * Creates a new bookmark by extracting the URL and title from input fields,
+ * validating them, and adding the new bookmark to the local storage and DOM.
+ */
 function createNewBookmark() {
   const bookmarksSection = DOMCache.getElement(".bookmark-list");
   const bookmarkUrl = DOMCache.getElement("#bookmark-url");
@@ -325,23 +329,34 @@ function createNewBookmark() {
   const url = bookmarkUrl.value;
   const title = bookmarkTitle.value;
 
+  // Validate the provided URL and title. If the validation fails, stops the execution of the function early.
   if (!validateBookmark(url, title, bookmarkUrl, bookmarkTitle)) {
     return;
   }
 
+  // Create a new bookmark object.
   const newBookmark = {
     url,
     title,
   };
 
+  // Retrieve existing bookmarks from local storage
   const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+
+  // Add the new bookmark to the existing bookmarks
   bookmarks.push(newBookmark);
 
+  // Save the updated bookmarks to local storage
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  bookmarksSection.innerHTML += bookmarkMarkup(bookmarkUrl.value, bookmarkTitle.value);
 
+  // Display the new bookmark in the bookmarks section
+  bookmarksSection.innerHTML += bookmarkMarkup(url, title);
+
+  // Clear input fields after creating the bookmark
   bookmarkUrl.value = "";
   bookmarkTitle.value = "";
+
+  // Display success feedback to the user
   displaySuccessFeedback();
 }
 
