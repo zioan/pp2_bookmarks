@@ -395,16 +395,36 @@ function editBookmark(event) {
   openModal("", displayModalContent);
 }
 
+/**
+ * Updates the bookmark at the specified index with the provided URL and title,
+ * then updates the local storage, closes the modal, renders the updated bookmarks,
+ * and displays success feedback to the user.
+ * 
+ * @param {Array<Object>} bookmarks - The array of bookmark objects.
+ * @param {number} index - The index of the bookmark to update.
+ * @param {string} url - The updated URL of the bookmark.
+ * @param {string} title - The updated title of the bookmark.
+ */
 function editBookmarkHandler(bookmarks, index, url, title) {
+  // Create an updated bookmark object using object shorthand property syntax
   const updatedBookmark = {
     url,
     title,
   };
+
+  // Update the bookmark at the specified index
   bookmarks[index] = updatedBookmark;
 
+  // Update local storage with the modified bookmarks
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+  // Close the modal
   closeModal();
+
+  // Render the updated bookmarks
   renderBookmarks();
+
+  // Display success feedback to the user
   displaySuccessFeedback();
 }
 
