@@ -490,9 +490,17 @@ function confirmDelete() {
   displaySuccessFeedback();
 }
 
+/**
+ * Displays a success feedback message to the user and hides it after a certain duration.
+ */
 function displaySuccessFeedback() {
+  // Get the element for displaying success feedback
   const successFeedback = DOMCache.getElement(".success-feedback");
+
+  // Display the success feedback message
   successFeedback.style.display = "block";
+
+  // Set a timeout to hide the success feedback after 1500 milliseconds (1.5 seconds)
   setTimeout(() => {
     successFeedback.style.display = "none";
   }, 1500);
