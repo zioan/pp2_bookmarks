@@ -48,13 +48,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * This global object stores DOM elements in the cache.
- * The reason for this approach is to minimize the pollution caused
- * by global variables and to keep the code maintainable and as short
- * as possible by reducing repetitive code to retrieve DOM elements.
+ * @namespace DOMCache
+ * @description This global object stores DOM elements in a cache to minimize global variable pollution,
+ *              improve code maintainability, and reduce repetitive DOM queries.
  */
 const DOMCache = {
   cache: {},
+
+  /**
+   * Retrieves a single DOM element by its selector.
+   * If the element is already cached, returns the cached element.
+   * Otherwise, queries the DOM, caches the element, and then returns it.
+   *
+   * @param {string} selector - The CSS selector of the element to retrieve.
+   * @returns {Element|null} The DOM element matching the selector, or null if no match is found.
+   */
   getElement: function (selector) {
     // Check if the element is already cached
     if (this.cache.hasOwnProperty(selector)) {
@@ -67,6 +75,15 @@ const DOMCache = {
 
     return element;
   },
+
+  /**
+   * Retrieves a NodeList of DOM elements by their selector.
+   * If the elements are already cached, returns the cached NodeList.
+   * Otherwise, queries the DOM, caches the NodeList, and then returns it.
+   *
+   * @param {string} selector - The CSS selector of the elements to retrieve.
+   * @returns {NodeList} A NodeList of DOM elements matching the selector.
+   */
   getElements: function (selector) {
     // Check if the element is already cached
     if (this.cache.hasOwnProperty(selector)) {
@@ -81,7 +98,11 @@ const DOMCache = {
   },
 };
 
-// demo data
+/**
+ * Provides a set of demo data containing URLs and titles.
+ *
+ * @returns {Array<Object>} An array of objects, each containing a URL and a title.
+ */
 function demoData() {
   return [
     {
@@ -100,17 +121,24 @@ function demoData() {
 }
 
 /**
- * Check and retrieve bookmarks from the local storage.
- * If no data is found, the demo data is stored in the local storage.
+ * Loads bookmarks from local storage.
+ * On the first run or if the "bookmarks" entry in local storage is missing,
+ * it initializes the local storage with demo data. If the user deletes all
+ * bookmarks manually, the demo data will not be reloaded automatically.
+ *
+ * @returns {Array<Object>} An array of bookmark objects. Each object contains a URL and a title.
  */
+
 function loadBookmarks() {
   const bookmarks = localStorage.getItem("bookmarks");
 
+  // If no bookmarks are found in local storage, initialize with demo data
   if (!bookmarks) {
     localStorage.setItem("bookmarks", JSON.stringify(demoData()));
-    return demoData;
+    return demoData();
   }
 
+  // Parse and return the bookmarks from local storage
   return JSON.parse(bookmarks);
 }
 
