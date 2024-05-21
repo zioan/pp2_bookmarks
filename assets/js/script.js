@@ -255,56 +255,6 @@ function isValidUrl(url) {
 }
 
 /**
- * Validates a bookmark by checking if the URL and title are empty, if the URL is valid,
- * and displays appropriate warning messages if any validation fails.
- *
- * @param {string} url - The URL of the bookmark.
- * @param {string} title - The title of the bookmark.
- * @param {string} bookmarkUrl - The URL input field for the bookmark.
- * @param {string} bookmarkTitle - The title input field for the bookmark.
- * @returns {boolean} True if the bookmark is valid, otherwise false.
- */
-function validateBookmark(url, title, bookmarkUrl, bookmarkTitle) {
-  const modalContent = DOMCache.getElement(".warning-content");
-  const createWarningMessage = (message) => `<p class='warning'>${message}</p>`;
-
-  const warnings = {
-    emptyFields: createWarningMessage("You cannot save the bookmark with an empty URL and Title!"),
-    emptyUrl: createWarningMessage("You must provide a valid URL! The URL field is empty."),
-    emptyTitle: createWarningMessage("You must provide a Title! The Title field is empty."),
-    invalidUrl: createWarningMessage("The URL is not valid! You can copy the URL from the address bar to ensure your URL is valid and functional."),
-  };
-
-  const displayModalContent = "warning-content";
-
-  if (!url.trim() && !title.trim()) {
-    modalContent.innerHTML = warnings.emptyFields;
-    openModal(bookmarkUrl, displayModalContent);
-    return false;
-  }
-
-  if (!url.trim()) {
-    modalContent.innerHTML = warnings.emptyUrl;
-    openModal(bookmarkUrl, displayModalContent);
-    return false;
-  }
-
-  if (!title.trim()) {
-    modalContent.innerHTML = warnings.emptyTitle;
-    openModal(bookmarkTitle, displayModalContent);
-    return false;
-  }
-
-  if (!isValidUrl(url)) {
-    modalContent.innerHTML = warnings.invalidUrl;
-    openModal(bookmarkUrl, displayModalContent);
-    return false;
-  }
-
-  return true;
-}
-
-/**
  * Creates a new bookmark by extracting the URL and title from input fields,
  * validating them, and adding the new bookmark to the local storage and DOM.
  */
@@ -547,11 +497,6 @@ function openModal(elementToFocus, displayModalContent) {
     editMarkup.style.display = "flex";
   }
 
-  if (displayModalContent === "warning-content") {
-    const warningMarkup = DOMCache.getElement(".warning-content");
-    warningMarkup.style.display = "block";
-  }
-
   if (displayModalContent === "delete") {
     const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
     deleteConfirmationContent.style.display = "block";
@@ -576,7 +521,6 @@ function closeModal() {
   // Hide the overlay and all modal content
   modal.style.display = "none";
   editMarkup.style.display = "none";
-  warningMarkup.style.display = "none";
   deleteConfirmationContent.style.display = "none";
 
   // Reset the Safari warning display
