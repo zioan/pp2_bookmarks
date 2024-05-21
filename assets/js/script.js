@@ -453,6 +453,15 @@ function displaySuccessFeedback() {
   }, 1500);
 }
 
+/**
+ * This function checks if the current browser is Safari and performs specific validations accordingly.
+ * If the browser is Safari and either the URL is invalid or the title is empty, a warning message is displayed,
+ * and the function returns false. For other browsers, it uses the `reportValidity` method to validate the fields.
+ *
+ * @param {HTMLInputElement} urlInputField - The input field element for the URL.
+ * @param {HTMLInputElement} titleInputField - The input field element for the title.
+ * @returns {boolean} - Returns true if both fields are valid, otherwise false.
+ */
 function validateFields(urlInputField, titleInputField) {
   const safariWarning = DOMCache.getElement(".safari-warning");
 
