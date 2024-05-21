@@ -156,8 +156,11 @@ function clearSearchHandler() {
 }
 
 /**
- * Generates the markup for a bookmark.
- * If the title is empty, the URL will be displayed as the title.
+ * Generates the HTML markup for a bookmark item.
+ *
+ * @param {string} url - The URL of the bookmark.
+ * @param {string} title - The title of the bookmark.
+ * @returns {string} The HTML string representing the bookmark item.
  */
 function bookmarkMarkup(url, title) {
   return `
