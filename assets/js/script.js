@@ -466,12 +466,15 @@ function displaySuccessFeedback() {
 function validateFields(urlInputField, titleInputField) {
   const safariWarning = DOMCache.getElement(".safari-warning");
 
+  // Trim the input values to remove leading/trailing whitespace
+  const trimmedTitle = titleInputField.value.trim();
+
   // Check if the browser is safari (ua = userAgent)
   const ua = navigator.userAgent.toLowerCase();
   const isSafariBrowser = ua.includes("safari") && !ua.includes("chrome");
 
   // URL and title validation for Safari browser
-  if (isSafariBrowser && (!isValidUrl(urlInputField.value) || titleInputField.value === "")) {
+  if (isSafariBrowser && (!isValidUrl(urlInputField.value) || !trimmedTitle)) {
     safariWarning.style.display = "block";
     return false;
   }
@@ -481,7 +484,9 @@ function validateFields(urlInputField, titleInputField) {
     return false;
   }
 
-  if (!titleInputField.reportValidity()) {
+  if (!titleInputField.reportValidity() || !trimmedTitle) {
+    titleInputField.value = "";
+    titleInputField.focus();
     return false;
   }
 
