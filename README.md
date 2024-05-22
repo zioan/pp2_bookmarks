@@ -154,6 +154,40 @@ The Bookmark Manager application underwent comprehensive browser compatibility t
 
 Browser testing ensures that the application functions seamlessly and maintains consistent performance across different browsers, enhancing user experience and accessibility.
 
+## Bugs
+
+### Issue: URL Validation Bug in Safari
+
+Description:
+In Safari, the reportValidity method does not work as expected when used with input fields of type "url". This method is designed to trigger the browser's built-in validation UI and return a boolean indicating whether the field's value meets its constraints. While this works correctly in most modern browsers (e.g., Chrome, Firefox, Edge), Safari does not properly validate URLs using reportValidity.
+
+Symptoms:
+When using the reportValidity method for URL input fields in Safari, valid URLs may not be recognized as valid, and the default browser notification for invalid fields is not triggered. This issue prevents users from submitting forms or proceeding with actions that rely on valid URL input.
+
+Solution:
+To address this issue, a custom validation function was implemented to handle URL validation specifically for Safari. The solution involves:
+
+1. Browser Detection:
+
+- Detecting if the current browser is Safari by checking the user agent string.
+
+2. Custom URL Validation:
+
+- Implementing a custom function isValidUrl that attempts to create a new URL object from the input value and checks its protocol. This method is used if the browser is detected as Safari.
+
+3. Conditional Validation Logic:
+
+- For Safari: Using the custom isValidUrl function and checking the URL.
+- For other browsers: Using the reportValidity method to validate the fields.
+
+Code Implementation:
+
+![Implementation validateFields](assets/readme/images/snippet_1.png)
+
+![Implementation isValidUrl](assets/readme/images/snippet_2.png)
+
+By implementing this solution, I ensure that URL and title validation works consistently across all browsers, including Safari. The custom validation function provides a fallback mechanism for Safari, improving the overall user experience and reliability of the application.
+
 ## Version Control
 
 ### My Git Workflow
