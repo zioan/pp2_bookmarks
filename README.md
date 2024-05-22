@@ -113,6 +113,22 @@ Desktop
 
 The Bookmark Manager application prioritizes accessibility to ensure inclusivity for all users. Accessibility features were thoroughly tested and validated, meeting industry standards for web accessibility.
 
+#### Accessibility Warning: Possible Misuse of aria-label
+
+The HTML validator raised a warning regarding the potential misuse of the aria-label attribute on some icon elements.
+
+![aria-label validation warning](assets/readme/images/aria_label_warning.png)
+
+The aria-label attribute is used to provide an accessible label for elements that may not have a visible text label or have a non-descriptive label. It is intended to improve accessibility for users who rely on screen readers or other assistive technologies.
+
+In this case, the warning suggests that the use of aria-label on the icon element may not be appropriate or necessary. The validator considers it a potential misuse because the icon itself (fa-solid fa-check) is likely meant to convey a visual representation of "success," and the aria-label attribute is redundant or may not accurately describe the icon's purpose.
+
+To address this warning, I have removed the aria-label attribute from some icon elements. This approach aligns with the validator's recommendation and ensures that the HTML markup adheres to best practices for accessibility.
+
+It's important to note that while the validator raised a warning, the decision to use or remove aria-label on icon elements can be subjective and may depend on the specific context and purpose of the icon. In some cases, providing an aria-label for icons can enhance accessibility, but it should be used judiciously and accurately describe the icon's purpose or function.
+
+By removing the aria-label attribute from the icon elements, I have addressed the validator's warning and ensured that my HTML markup follows accessibility guidelines more closely.
+
 ### HTML and CSS Validation
 
 [HTML validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F)
