@@ -28,27 +28,27 @@ The Bookmark Manager is a JavaScript application that allows users to manage the
 
 ## Features
 
-![Screenshot of the website on different devices](assets/readme/images/overview.png)
-
 - **Save Bookmarks**: Add new bookmarks by providing a URL and a title.
 
-  ![Screenshot of the website on different devices](assets/readme/images/new_bookmark.png)
+  ![New bookmark section](assets/readme/images/new_bookmark.png)
 
 - **Edit and Delete Bookmarks**: Modify the URL and title, and remove unwanted bookmarks from collection.
 
-  ![Screenshot of the website on different devices](assets/readme/images/edit_delete.png)
+  ![Edit and delete](assets/readme/images/edit_delete.png)
 
-  ![Screenshot of the website on different devices](assets/readme/images/delete_confirmation.png)
+  ![Delete confirmation modal](assets/readme/images/delete_confirmation.png)
 
 - **Search Bookmarks**: Quickly find bookmarks by searching for keywords in their titles.
 
-  ![Screenshot of the website on different devices](assets/readme/images/search.png)
+  ![Search functionality](assets/readme/images/search.png)
 
-- **Bookmark Validation**: Ensures that bookmarks have valid URLs and non-empty titles.
+- **Bookmark Validation**: Ensures that bookmarks have valid URLs and non-empty fields.
 
-  ![Screenshot of the website on different devices](assets/readme/images/warning_url_validation.png)
+  ![Empty URL validation](assets/readme/images/empty_url.png)
 
-  ![Screenshot of the website on different devices](assets/readme/images/warning_empty_fields.png)
+  ![Invalid URL validation](assets/readme/images/invalid_url.png)
+
+  ![Empty Title validation](assets/readme/images/empty_title.png)
 
 - **Local Storage**: Bookmarks are stored locally in the browser, so the data persists across sessions.
 - **Responsive Design**: The application is optimized for various screen sizes and devices.
@@ -103,11 +103,11 @@ As a frequent internet user who often discovers interesting websites and resourc
 
 Mobile
 
-![Screenshot of the website on different devices](assets/readme/images/lighthouse_mobile.png)
+![Lighthouse mobile test](assets/readme/images/lighthouse_mobile.png)
 
 Desktop
 
-![Screenshot of the website on different devices](assets/readme/images/lighthouse_desktop.png)
+![Lighthouse desktop test](assets/readme/images/lighthouse_desktop.png)
 
 ### Accessibility Validation
 
@@ -115,13 +115,13 @@ The Bookmark Manager application prioritizes accessibility to ensure inclusivity
 
 ### HTML and CSS Validation
 
-[HTML Validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F)
+[HTML validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F)
 
-![Screenshot of the website on different devices](assets/readme/images/html_validation.png)
+![HTML validation](assets/readme/images/html_validation.png)
 
-[HTML Validation](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+[CSS validation](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 
-![Screenshot of the website on different devices](assets/readme/images/css_validation.png)
+![CSS validation](assets/readme/images/css_validation.png)
 
 ### JavaScript Validation
 
