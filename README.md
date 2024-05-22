@@ -134,17 +134,21 @@ By removing the aria-label attribute from the icon elements, I have addressed th
 
 ### HTML and CSS Validation
 
-[HTML validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F)
+No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F)
 
 ![HTML validation](assets/readme/images/html_validation.png)
 
-[CSS validation](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+No errors were found when passing through the official [Jigsaw validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fzioan.github.io%2Fpp2_bookmarks%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 
 ![CSS validation](assets/readme/images/css_validation.png)
 
 ### JavaScript Validation
 
-Each JavaScript function within the Bookmark Manager application was meticulously tested for errors and functionality using the browser console and [JSHint](https://jshint.com/) tool. This rigorous testing process ensures the reliability and efficiency of the JavaScript codebase.
+Each JavaScript function within the Bookmark Manager application was meticulously tested for errors and functionality using the browser console and [JSHint](https://jshint.com/) tool.
+
+No errors were found and the following metrics were returned:
+
+![JSHint validation](assets/readme/images/jshint.png)
 
 ### Browser Compatibility Testing
 
@@ -190,6 +194,10 @@ Code Implementation:
 ![Implementation isValidUrl](assets/readme/images/snippet_2.png)
 
 By implementing this solution, I ensure that URL and title validation works consistently across all browsers, including Safari. The custom validation function provides a fallback mechanism for Safari, improving the overall user experience and reliability of the application.
+
+### Unfixed Bugs
+
+There are no known and unfixed bugs.
 
 ## Version Control
 
