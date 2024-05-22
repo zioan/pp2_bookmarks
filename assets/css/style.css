@@ -335,7 +335,7 @@ summary {
   border-radius: var(--border-radius);
 }
 
-.close {
+#close-modal {
   color: var(--text-color);
   position: absolute;
   top: 1rem;

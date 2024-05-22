@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for confirm delete button
   DOMCache.getElement("#btn-confirm-delete").addEventListener("click", confirmDelete);
 
+  // Event listener for closing modal
+  DOMCache.getElement("#close-modal").addEventListener("click", closeModal);
+
   // Event listener for cancel delete button
   DOMCache.getElement("#btn-cancel-delete").addEventListener("click", closeModal);
 
