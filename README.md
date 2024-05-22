@@ -22,15 +22,18 @@ The Bookmark Manager is a JavaScript application that allows users to manage the
    - [HTML and CSS Validation](#html-and-css-validation)
    - [JavaScript Validation](#javascript-validation)
    - [Browser Compatibility Testing](#browser-compatibility-testing)
-7. [Version Control](#version-control)
-8. [Deployment](#deployment)
-9. [Credits](#credits)
+7. [Bugs](#bugs)
+8. [Version Control](#version-control)
+9. [Deployment](#deployment)
+10. [Credits](#credits)
 
 ## Features
 
+- **Demo Data**: The application provide demo data for the first load for testing purpose.
+
 - **Save Bookmarks**: Add new bookmarks by providing a URL and a title.
 
-  ![New bookmark section](assets/readme/images/new_bookmark.png)
+  ![New bookmark](assets/readme/images/new_bookmark.png)
 
 - **Edit and Delete Bookmarks**: Modify the URL and title, and remove unwanted bookmarks from collection.
 
@@ -89,13 +92,13 @@ As a frequent internet user who often discovers interesting websites and resourc
 
 ## Key Functionalities
 
-- **Custom DOM Cache**:The Bookmark Manager utilizes a custom DOMCache object for caching DOM elements, improving performance by reducing repetitive code in retrieving elements from the document. This object enhances maintainability and readability while optimizing the application's efficiency.
+- **Custom DOM Cache**: The Bookmark Manager utilizes a custom DOMCache object for caching DOM elements, improving performance by reducing repetitive code in retrieving elements from the document. This object enhances maintainability and readability while optimizing the application's efficiency.
 
-- **Search Functionality**: The Bookmark Manager features a robust search functionality, allowing users to quickly find bookmarks by title. Search results are dynamically updated as users type their query, providing real-time feedback and enhancing usability.
+- **Search Functionality**: The Bookmark Manager features a search functionality, allowing users to quickly find bookmarks by title. Search results are dynamically updated as users type their query, providing real-time feedback and enhancing usability.
 
 - **Local Storage Integration**: Bookmark data is securely stored locally in the user's browser using the localStorage API. This integration enables data persistence across sessions, ensuring that users' bookmarks are retained even after closing and reopening the application.
 
-- **URL Validation and Feedback**: During bookmark creation or update, the application validates the URL to ensure it is correctly formatted and functional. Users receive immediate feedback and warning messages if the URL is incorrect or if any fields are left empty, enhancing data integrity and user experience. A visual feedback icon indicate successful operations.
+- **URL Validation and Feedback**: During bookmark creation or update, the application validates the URL to ensure it is correctly formatted and functional. Users receive immediate feedback if the URL is incorrect or if any fields are left empty, enhancing data integrity and user experience. A visual feedback icon indicate successful operations.
 
 ## Manual Testing and Validation
 
@@ -156,7 +159,7 @@ Browser testing ensures that the application functions seamlessly and maintains 
 
 ## Bugs
 
-### Issue: URL Validation Bug in Safari
+### URL Validation Bug in Safari
 
 Description:
 In Safari, the reportValidity method does not work as expected when used with input fields of type "url". This method is designed to trigger the browser's built-in validation UI and return a boolean indicating whether the field's value meets its constraints. While this works correctly in most modern browsers (e.g., Chrome, Firefox, Edge), Safari does not properly validate URLs using reportValidity.
@@ -214,20 +217,22 @@ For deploying the application, I utilized [GitHub Pages](https://pages.github.co
 
 A special thanks to my mentor, Spence.
 
-- The favicon was made using [favicon.io](https://favicon.io/)
+- The screenshot with different devices was made using [Am I Responsive](https://ui.dev/amiresponsive).
+
+- The favicon was made using [favicon.io](https://favicon.io/).
 
 - [MDN Web Docs](https://developer.mozilla.org/): Valuable reference for JavaScript documentation, including event handling, DOM manipulation, local storage, form validation, and error handling techniques.
 
 - [CSS-Tricks](https://css-tricks.com/): Helpful resource for CSS styling and responsive design principles.
 
-- [W3Schools](https://www.w3schools.com/): Comprehensive tutorials and references for HTML, CSS, and JavaScript, providing insights into various programming concepts and techniques used in the project.
+- [W3Schools](https://www.w3schools.com/): Comprehensive references for HTML, CSS, and JavaScript, providing insights into various programming concepts and techniques used in the project.
 
 - [Can I Use](https://caniuse.com/): Essential resource for checking browser compatibility and understanding web technology support across different browsers.
 
-- The implementation of URL validation was influenced by an informative [article](https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/) I found on FreeCodeCamp.org.
+- The implementation of URL validation was influenced by an informative [article](https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/) found on FreeCodeCamp.org.
 
 - The implementation of isSafari function to check if the browser is Safari was influenced by this [thread](https://stackoverflow.com/questions/7944460/detect-safari-browser) on StackOverflow.
 
-- Beyond this, I didn't directly utilize code from other sources. My previous professional experience as a web developer and the learning materials from Code Institute was the main source of knowledge in building this application.
+- Beyond the two implementations mentioned above, I didn't directly utilize code from other sources. My previous professional experience as a web developer and the learning materials from Code Institute was the main source of knowledge in building this application.
 
-<a href="#bookmark-manager">Back to Top</a>
+[Back to Top](#bookmark-manager)
