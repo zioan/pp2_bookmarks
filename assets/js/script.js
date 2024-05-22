@@ -1,6 +1,5 @@
 // Code that is executed after the document is loaded
 document.addEventListener("DOMContentLoaded", function () {
-  // Functions that must be loaded initially
   loadBookmarks(); // Load bookmarks from local storage
   renderBookmarks(); // Render bookmarks initially
 
@@ -8,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   DOMCache.getElement("#btn-clear").addEventListener("click", clearSearchHandler);
   DOMCache.getElement("#bookmarks-search").addEventListener("input", renderBookmarks);
 
-  // Event listener for bookmark creation
+  // Event listener for new bookmark creation
   DOMCache.getElement("#btn-save").addEventListener("click", createNewBookmark);
 
   // Event listener for edit and delete handlers that open the modal
@@ -23,20 +22,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for cancel delete button
   DOMCache.getElement("#btn-cancel-delete").addEventListener("click", closeModal);
 
-  // Add event listener to close the modal with the Escape key
+  // Event listener to close the modal with the Escape key
   document.addEventListener("keydown", function (event) {
     // Listen for keydown events
     const modal = document.querySelector(".modal");
+    // Check if Escape key is pressed
     if (modal && event.key === "Escape") {
-      // Check if Escape key is pressed
       closeModal();
     }
   });
 
-  // Prevent the overlay from closing if the click is inside the modal
+  // Prevent the overlay from closing if the click event is inside the modal
   DOMCache.getElement("#overlay").addEventListener("click", function (event) {
+    // Check if the clicked element is not inside the modal
     if (!event.target.closest(".modal")) {
-      // Check if the clicked element is not inside the modal
       closeModal();
     }
   });
@@ -55,7 +54,7 @@ const DOMCache = {
    * Otherwise, queries the DOM, caches the element, and then returns it.
    *
    * @param {string} selector - The CSS selector of the element to retrieve.
-   * @returns {Element|null} The DOM element matching the selector, or null if no match is found.
+   * @returns {Element|null} The DOM element matching the selector.
    */
   getElement: function (selector) {
     // Check if the element is already cached
@@ -121,7 +120,7 @@ function demoData() {
 function loadBookmarks() {
   const bookmarks = localStorage.getItem("bookmarks");
 
-  // If no bookmarks are found in local storage, initialize with demo data
+  // If the bookmarks object is not found in local storage, initialize with demo data
   if (!bookmarks) {
     localStorage.setItem("bookmarks", JSON.stringify(demoData()));
     return demoData();
@@ -274,7 +273,7 @@ function createNewBookmark() {
     return;
   }
 
-  // Create a new bookmark object.
+  // Create a new bookmark object using object shorthand property syntax
   const newBookmark = {
     url,
     title,
@@ -467,7 +466,7 @@ function displaySuccessFeedback() {
 function validateFields(urlInputField, titleInputField) {
   const safariWarning = DOMCache.getElement(".safari-warning");
 
-  // Check if the browser is safari
+  // Check if the browser is safari (ua = userAgent)
   const ua = navigator.userAgent.toLowerCase();
   const isSafariBrowser = ua.includes("safari") && !ua.includes("chrome");
 
@@ -490,7 +489,7 @@ function validateFields(urlInputField, titleInputField) {
 }
 
 /**
- * Opens a modal with specified content and optionally focuses on a specific input field.
+ * Opens a modal with specified content (edit or delete confirmation).
  * @param {string} displayModalContent - The type of modal content to display.
  */
 function openModal(displayModalContent) {
@@ -518,13 +517,13 @@ function openModal(displayModalContent) {
 function closeModal() {
   // Get the modal and specific modal content elements
   const modal = DOMCache.getElement("#overlay");
-  const editMarkup = DOMCache.getElement(".edit-content");
+  const editContent = DOMCache.getElement(".edit-content");
   const deleteConfirmationContent = DOMCache.getElement(".delete-confirmation-content");
   const safariWarning = DOMCache.getElement(".safari-warning");
 
-  // Hide the overlay and all modal content
+  // Hide the modal overlay and all modal content
   modal.style.display = "none";
-  editMarkup.style.display = "none";
+  editContent.style.display = "none";
   deleteConfirmationContent.style.display = "none";
 
   // Reset the Safari warning display
